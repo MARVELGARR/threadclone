@@ -1,6 +1,11 @@
+import ForYouButton from "@/components/myComponents/forYouButton";
+
+
 const ForYoyPage = () => {
     return (
-        <div className=""></div>
+        <div className="">
+            <ForYouButton/>
+        </div>
     );
 }
  
