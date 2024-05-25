@@ -16,10 +16,7 @@ function Login() {
         email:"",
         password:"",
     })
-
-
-
-    
+  
 
     const login = async (e: { preventDefault: () => void }) =>{
         e.preventDefault();
