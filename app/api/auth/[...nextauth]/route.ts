@@ -1,81 +1,91 @@
-import NextAuth from "next-auth/next";
+import NextAuth, { AuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 
-import  CredentialsProvider  from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
 import { prisma } from "@/prisma/prismaClient";
-import GoogleProvider from "next-auth/providers/google"
-import GitHubProvider from "next-auth/providers/github"
-import bcrypt from "bcrypt"
-import { NextResponse } from "next/server";
+import { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+declare module "next-auth" {
+    interface Session {
+      user: {
+        id: string;
+        name: string;
+        email: string;
+        image?: string;
+      };
+    }
+  
+    interface JWT {
+      id: string;
+    }
+  }
+  
 
-export const authOptions = {
-    
-    adapter: PrismaAdapter(prisma),
-    providers:[
+export const authOptions: AuthOptions = {
+    adapter: PrismaAdapter(prisma) as unknown as Adapter,
+    providers: [
         GoogleProvider({
-            clientId:process.env.GOOGLE_ID as string,
-            clientSecret:process.env.GOOGLE_SECRET as string,
+            clientId: process.env.GOOGLE_ID as string,
+            clientSecret: process.env.GOOGLE_SECRET as string,
         }),
         GitHubProvider({
-            clientId:process.env.GITHUB_ID as string,
-            clientSecret:process.env.GITHUB_SECRET as string,
+            clientId: process.env.GITHUB_ID as string,
+            clientSecret: process.env.GITHUB_SECRET as string,
         }),
         CredentialsProvider({
             name: "credentials",
-            credentials : {
-                email : { label: "Email", type: "string", placeholder: "marvellous obatale"},
-                password : { label: "Password", type: "password" },
-                username : { label: "username", type: "string", placeholder: "marvel"}
+            credentials: {
+                email: { label: "Email", type: "text", placeholder: "email@example.com" },
+                password: { label: "Password", type: "password" },
+                username: { label: "Username", type: "text", placeholder: "your_username" },
             },
-            async authorize(credentials){
-                //to check wether the user entered his/her email address and password
-                if(!credentials?.email || !credentials?.password){
-                    return console.error("Invalid credentials")
+            async authorize(credentials) {
+                if (!credentials?.email || !credentials?.password) {
+                    throw new Error("Invalid credentials");
                 }
 
-                //to check is the user already exists
                 const user = await prisma.user.findUnique({
-                    where:{
-                        email: credentials.email
-                    }
-                })
+                    where: { email: credentials.email },
+                });
 
-                // to check if no user was found
-                if(!user || !user.hashedPassword){
-                    return NextResponse.json({message: "email has not been registered"})
+                if (!user || !user.hashedPassword) {
+                    throw new Error("Email has not been registered");
                 }
 
-                // check if password matches
-                const passwordMatches = await bcrypt.compare(credentials.password, user.hashedPassword)
+                const passwordMatches = await bcrypt.compare(credentials.password, user.hashedPassword);
 
-                // to check if it the password does not match
-                if(!passwordMatches) {
-                    return NextResponse.json({message:" password does not match"})
+                if (!passwordMatches) {
+                    throw new Error("Password does not match");
                 }
-                console.log(" logged in successfully");
-                return user
 
-            }
+                return user;
+            },
         }),
     ],
-    callbacks : {
-        async jwt({ token, user, account}){
-            return { ...token, ...user, ...account}
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+            }
+            return token;
         },
-        async session({ session, token, account, user }){
-            session.account = token
-            return session
-        }
+        async session({ session, token }) {
+            if(session.user){
+
+                session.user.id = token.id as string;
+            }
+            return session;
+        },
     },
-   
-    secret: process.env.SECRETE,
-    session:{
-        strategy:"jwt",
+    secret: process.env.SECRET,
+    session: {
+        strategy: "jwt",
     },
     debug: process.env.NODE_ENV === "development",
-}
+};
 
-const handler = NextAuth(authOptions)
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST}
-
+export { handler as GET, handler as POST };
