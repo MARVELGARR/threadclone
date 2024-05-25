@@ -9,7 +9,7 @@ const ForYouButton = ({className}: {className?: string}) => {
     return (
         <Link
         href={pathname =="/following" ? "/foryou": "/following"}
-         className={cn("flex items-center px-3 py-2 rounded-md", className)}>
+         className={cn("flex items-center px-4 py-3 rounded-3xl border-2", className)}>
             {pathname === "/following"? "following" : "for you"}
             <ArrowLeftRight />
          </Link>
