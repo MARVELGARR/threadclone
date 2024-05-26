@@ -9,7 +9,6 @@ import { toast } from 'react-hot-toast'
 
 function Login() {
 
-    const router = useRouter()
     const [data, setData] = useState({
         email:"",
         password:"",
