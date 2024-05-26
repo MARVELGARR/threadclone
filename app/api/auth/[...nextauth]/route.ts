@@ -27,8 +27,8 @@ export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma) as unknown as Adapter,
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID as string,
-            clientSecret: process.env.GOOGLE_SECRET as string,
+            clientId: process.env.GOOGLE as string,
+            clientSecret: process.env.GOOGLE_SECRE as string,
         }),
         GitHubProvider({
             clientId: process.env.GITHUB_ID as string,
@@ -79,7 +79,7 @@ export const authOptions: AuthOptions = {
             return session;
         },
     },
-    secret: process.env.SECRET,
+    secret: process.env.SECRE,
     session: {
         strategy: "jwt",
     },
