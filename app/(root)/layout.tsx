@@ -7,7 +7,10 @@ const PageLayout = ({children}: {children: React.ReactNode}) => {
         <div className="w-full">
             <Header className='h-20'/>
             <MobileNav className=" lg:hidden"/>
-            {children}
+            <div className="w-full flex justify-center">
+
+                {children}
+            </div>
         </div>
     );
 }
