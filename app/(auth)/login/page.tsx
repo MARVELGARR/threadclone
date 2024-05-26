@@ -11,28 +11,28 @@ import { redirect } from 'next/navigation'
 
 function Login() {
 
-    
+    const router = useRouter()
     const [data, setData] = useState({
         email:"",
         password:"",
     })
-  
+    
 
     const login = async (e: { preventDefault: () => void }) =>{
         e.preventDefault();
         try{
 
-            signIn("credentials", {...data, redirect:false})
-            .then((callback)=>{
-                if(callback?.error){
-                    toast.error(callback.error)
-                }
-                if(callback?.ok && !callback?.error){
 
-                    toast.success("Logged in")
-                    window.location.replace('/home')
-                }
-            })
+            const callback = await signIn("credentials", { ...data, redirect: false });
+
+            if(callback?.error){
+                toast.error(callback.error)
+            }
+            else{
+
+                toast.success("Logged in")
+                router.push('/home')
+            }
                        
         }
         catch(error){
