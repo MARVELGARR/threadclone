@@ -2,15 +2,17 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import Main_nav from "./mainNav";
-import { MenuSquareIcon } from "lucide-react";
+
 import Link from "next/link";
+import Menu from "./headerMenu";
 
 type HeaderProps = {
-    className?: string,
+    className?: string
 }
 
 const Header: React.FC<HeaderProps> = ({
     className,
+
 }) => {
     return (
         <div className={cn('flex items-center justify-between px-40 w-full', className)}>
@@ -28,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
             <Main_nav/>
 
-            <MenuSquareIcon className="w-4 md:w-6 lg:w-8 xl:w-16 h-10"/>
+            <Menu />
             
         </div>
     );

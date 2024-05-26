@@ -1,10 +1,8 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+
 
 
 
@@ -22,17 +20,16 @@ function Login() {
         e.preventDefault();
         try{
 
-
-            const callback = await signIn("credentials", { ...data, redirect: false });
-
+            const callback = await signIn("credentials", {...data, redirect:true})
             if(callback?.error){
                 toast.error(callback.error)
             }
-            else{
+            if(callback?.ok && !callback?.error){
 
                 toast.success("Logged in")
-                router.push('/home')
+                window.location.assign('/home')
             }
+            
                        
         }
         catch(error){
@@ -73,7 +70,7 @@ function Login() {
                     </div>
                 </form>
                 <div className='flex w-full gap-2 mt-3 items-center justify-center'>
-                    <button onClick={()=>signIn("github")} className="w-full flex bg-white border-black border-4 rounded-xl items-center justify-center">
+                    <button onClick={()=>signIn("github", { callbackUrl: '/home'})} className="w-full flex bg-white border-black border-4 rounded-xl items-center justify-center">
                         <img 
                             src="/svg/github.svg"
                             alt="github"
@@ -81,7 +78,7 @@ function Login() {
                         />
                         <p className="">github</p>
                     </button>
-                    <button onClick={()=>signIn("google")} className="w-full flex rounded-xl border-black border-4 justify-center items-center">
+                    <button onClick={()=>signIn("google", { callbackUrl: '/home'})} className="w-full flex rounded-xl border-black border-4 justify-center items-center">
                         <img 
                             src="/svg/google.svg"
                             alt="goggle"
