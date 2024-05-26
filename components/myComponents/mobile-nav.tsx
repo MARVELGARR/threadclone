@@ -45,9 +45,10 @@ const MobileNav = ({className}:{
 
     return (
         <nav className={cn("flex w-full items-center justify-between  h-fit absolute bottom-0", className)}>
-            {routes.map((route)=>{
+            {routes.map((route, index)=>{
                 return (
                     <Link
+                    key={index}
                         href={route.href}
                         className={cn(' p-3 rounded-md hover:bg-green-300', route.active ? " font-bold text-black" : "text-foreground text-gray-300")}
                     >
