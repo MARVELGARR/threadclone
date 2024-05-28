@@ -1,7 +1,11 @@
 'use client'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import useIsOpen from "@/hooks/useOpen";
 import { ExtendedUser } from "@/util/types";
+import { Instagram } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 
 
@@ -10,12 +14,13 @@ const Bio = ({data,}: {
     data: ExtendedUser | null
 }) => {
     const session = useSession()
+    const {isOpen, handleOpen} = useIsOpen(false)
     return (
         <div className=" text-wrap">
             <div className="flex items-center justify-between ">
                 <div className="flex flex-col items-center">
                     
-                    <div className="">{data?.profile[0]?.name || <div className=' italic'>no profile name</div>}</div>
+                    <div className="">{data?.profile?.name || <div className=' italic'>no profile name</div>}</div>
                     <div className="">{data?.name}</div>
                 </div>
                 <Avatar className="w-[70px] h-[70px]">
@@ -23,8 +28,16 @@ const Bio = ({data,}: {
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </div>
-            <div className="">{data?.profile[0]?.bio || <div className=' italic'>no bio</div>}</div>
-            <div className=""></div>
+            <div className="flex items-center justify-between">
+                <div className="">{data?.profile?.bio || <div className=' italic'>no bio....................................................({new Array(44)})</div>}</div>
+                <Link
+                    href='www.instagram.com'
+                    className=""
+                >
+                    <Instagram/>
+                </Link>
+            </div>
+            <Button onClick={handleOpen} className="w-full font-extrabold" variant={"outline"}>Edit Profile</Button>
         </div>
     );
 }
