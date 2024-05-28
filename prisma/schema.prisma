@@ -25,7 +25,7 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   account        Account[]
-  profile Profile[]
+  profile Profile?
 }
 
 model Account {
@@ -51,6 +51,25 @@ model Profile{
   name           String
   bio           String   
   links           String[]
-  userId String @db.ObjectId
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  follower Followers[] @relation("followerRelation")
+  following Followers[] @relation("followingRelation")
+  userId String @db.ObjectId @unique
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
+
+model Followers{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  followerId    String   @db.ObjectId
+  followingId   String   @db.ObjectId
+  follower      Profile  @relation("followerRelation",fields: [followerId], references: [id], onDelete: Cascade)
+  following     Profile  @relation("followingRelation",fields: [followingId], references: [id], onDelete: Cascade)
+
+  status String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  
+  @@unique([followerId, followingId])
+}
+

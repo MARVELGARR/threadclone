@@ -15,16 +15,15 @@ const Bio = ({data,}: {
             <div className="flex items-center justify-between ">
                 <div className="flex flex-col items-center">
                     
-                    <div className="">{data?.profile[0]?.name || "No profile name"}</div>
+                    <div className="">{data?.profile[0]?.name || <div className=' italic'>no profile name</div>}</div>
                     <div className="">{data?.name}</div>
                 </div>
                 <Avatar className="w-[70px] h-[70px]">
                     <AvatarImage src={session.data?.user?.image} />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-
             </div>
-            <div className=""></div>
+            <div className="">{data?.profile[0]?.bio || <div className=' italic'>no bio</div>}</div>
             <div className=""></div>
         </div>
     );

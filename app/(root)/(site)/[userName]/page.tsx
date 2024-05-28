@@ -25,7 +25,6 @@ export default async function ProfilePage({params}:{
         <>
             <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
             <div className="flex flex-col flex-wrap">
-                {JSON.stringify(currentUser.email)}
                 <Bio data={currentUser}/>
             </div>
         </>
