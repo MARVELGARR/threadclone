@@ -2,15 +2,42 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
+import Bio from "./_components/bio";
 
 
-const ProfilePage = async () => {
-    const session = await getServerSession(authOptions)
 
-    const currentUser = await getCurrentUser(session?.data?.user.id)
+export default async function ProfilePage({params}:{
+    params:{
+        userName: string
+    }
+}){
+    
+    const currentUser = await wait()
+    if(!currentUser){
+        return (
+            <div className="">
+                ...Loading
+            </div>
+        )
+    }
+    
     return (
-        <div className="">{currentUser.name}</div>
+        <>
+            <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
+            <div className="flex flex-col flex-wrap">
+                {JSON.stringify(currentUser.email)}
+                <Bio data={currentUser}/>
+            </div>
+        </>
     );
 }
- 
-export default ProfilePage;
+
+export async function wait(){
+    const session = await getServerSession(authOptions)
+    if(!session){
+        return console.error("User not authenticated")
+    }
+    const currentUser = await getCurrentUser(session?.user.id)
+    
+    return currentUser
+}

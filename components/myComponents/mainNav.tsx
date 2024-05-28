@@ -14,36 +14,36 @@ const Main_nav = ({className}: {className?: string}) => {
             label: 'Home',
             href: '/home',
             active: pathname === '/home',
-            logo : <HomeIcon className="w-4 md:w-6 lg:w-8 "/>
+            logo : <HomeIcon className="w-9 h-9  "/>
         },
         {
             label: 'search',
             href: '/search',
             active: pathname === '/search',
-            logo : <SearchIcon className="w-4 md:w-6 lg:w-8 "/>
+            logo : <SearchIcon className="w-9 h-9  "/>
         },
         {
             label: 'edit',
             href: '/edit',
             active: pathname === '/edit',
-            logo : <Edit className="w-4 md:w-6 lg:w-8 "/>
+            logo : <Edit className=" w-9 h-9 "/>
         },
         {
             label: 'likes',
             href: '/likes',
             active: pathname === '/likes',
-            logo : <Heart className="w-4 md:w-6 lg:w-8 "/>
+            logo : <Heart className="w-9 h-9 "/>
         },
         {
             label: 'profile',
             href: `@${session.data?.user.name}` || "/proflie",
-            active: pathname === '/profile',
-            logo : <User className="w-4 md:w-6 lg:w-8 "/>
+            active: pathname === `/@${session.data?.user.name}`,
+            logo : <User className="w-9 h-9  stroke-slate-300 "/>
         },
     ]
 
     return (
-        <nav className={cn("flex items-center space-x-4 lg:space-x-8 h-fit", className)}>
+        <nav className={cn("flex items-center space-x-8 h-fit", className)}>
             {routes.map((route)=>{
                 return (
                     <Link

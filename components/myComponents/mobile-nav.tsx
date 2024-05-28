@@ -15,31 +15,31 @@ const MobileNav = ({className}:{
             label: 'Home',
             href: '/home',
             active: pathname === '/home',
-            logo : <HomeIcon className="w-4 md:w-6 lg:w-8 "/>
+            logo : <HomeIcon className="w-9 h-9 "/>
         },
         {
             label: 'search',
             href: '/search',
             active: pathname === '/search',
-            logo : <SearchIcon className="w-4 md:w-6 lg:w-8 "/>
+            logo : <SearchIcon className="w-9 h-9 "/>
         },
         {
             label: 'edit',
             href: '/edit',
             active: pathname === '/edit',
-            logo : <Edit className="w-4 md:w-6 lg:w-8 "/>
+            logo : <Edit className="w-9 h-9 "/>
         },
         {
             label: 'likes',
             href: '/likes',
             active: pathname === '/likes',
-            logo : <Heart className="w-4 md:w-6 lg:w-8 "/>
+            logo : <Heart className="w-9 h-9 "/>
         },
         {
             label: 'profile',
             href: '/profile',
             active: pathname === '/profile',
-            logo : <User className="w-4 md:w-6 lg:w-8 "/>
+            logo : <User className="w-9 h-9 "/>
         },
     ]
 

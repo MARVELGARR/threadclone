@@ -10,14 +10,17 @@ import {
 import { signOut } from "next-auth/react";
   
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { cn } from "@/lib/utils";
 
-const Menu = () => {
+const Menu = ({className}:{
+    className?: string
+}) => {
     return (
-        <div className="">
+        <div className={cn("", className)}>
             <DropdownMenu>
                 <DropdownMenuTrigger>
 
-                    <AlignRight className="w-4 md:w-6 lg:w-8 xl:w-16 h-10"/>
+                    <AlignRight className="w-9 h-9 "/>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem className=' font-bold cursor-pointer  '>

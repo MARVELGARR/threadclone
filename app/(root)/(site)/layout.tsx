@@ -11,7 +11,9 @@ const SiteLayout = ({children}:{children: React.ReactNode}) => {
         },
     })
     return (
-        <div className=""></div>
+        <div className=" mx-auto  max-w-[620px]">
+            {children}
+        </div>
     );
 }
  

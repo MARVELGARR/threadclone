@@ -17,10 +17,10 @@ const PageLayout = ({children}: {children: React.ReactNode}) => {
     })
     return (
         <div className="w-full">
-            <Header className='h-20'/>
-            <MobileNav className=" lg:hidden"/>
-            <div className="w-full flex justify-center">
 
+            <Header className='py-4'/>
+            <MobileNav className=" lg:hidden"/>
+            <div className="">
                 {children}
             </div>
         </div>
