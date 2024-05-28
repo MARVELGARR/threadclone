@@ -50,7 +50,7 @@ model Profile{
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   bio           String   
-  links           String[]
+  links           String
   follower Followers[] @relation("followerRelation")
   following Followers[] @relation("followingRelation")
   userId String @db.ObjectId @unique

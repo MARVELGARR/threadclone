@@ -1,6 +1,8 @@
 
 import { prisma } from '@/prisma/prismaClient';
 import { ExtendedUser } from '@/util/types';
+import { redirect } from 'next/navigation';
+
 
 
 
@@ -21,7 +23,7 @@ const getCurrentUser = async (userId: string | undefined): Promise<ExtendedUser 
         
     } catch (error) {
         console.error(error);
-        throw new Error('Error getting current user user'); 
+        redirect('/')
     }
 }
 
