@@ -3,13 +3,15 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
 import Bio from "./_components/bio";
+import ReplyRepost from "@/components/myComponents/reply_repost";
 
 
 
-export default async function ProfilePage({params}:{
+export default async function ProfilePage({params, children}:{
     params:{
         userName: string
-    }
+    }, 
+    children: React.ReactNode
 }){
     
     const currentUser = await wait()
@@ -24,8 +26,10 @@ export default async function ProfilePage({params}:{
     return (
         <>
             <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
-            <div className="flex flex-col flex-wrap">
+            <div className="flex flex-col flex-wrap z-99999">
                 <Bio data={currentUser}/>
+                <ReplyRepost userName={params.userName}/>
+                    {children}
             </div>
         </>
     );

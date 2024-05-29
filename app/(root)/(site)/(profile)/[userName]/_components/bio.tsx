@@ -1,5 +1,6 @@
 'use client'
 
+import UpdateProfileDialog from "@/components/myDialogs/updateProfile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import useIsOpen from "@/hooks/useOpen";
@@ -7,7 +8,7 @@ import { ExtendedUser } from "@/util/types";
 import { Instagram } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import UpdateProfileDialog from "../../../../../components/myDialogs/updateProfile";
+
 
 
 
