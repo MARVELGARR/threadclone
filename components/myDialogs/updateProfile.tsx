@@ -1,6 +1,7 @@
 'use client'
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogFooter,
 
@@ -10,7 +11,6 @@ import { Button } from "../ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -21,43 +21,64 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Separator } from "../ui/separator";
+import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { updateProfileProps } from "@/util/types";
 
-type updateProfileProps ={
-    className?:string;
-    name:string;
-    bio:string;
-    link: string;
-}
+
+
 
 const formSchema = z.object({
     name: z.string().optional(),
     bio: z.string().optional(),
-    link: z.string().optional()
+    links: z.string().optional()
 })
 
 const UpdateProfileDialog: React.FC<updateProfileProps> = ({
     className,
+    id,
     name,
-    link,
+    links,
     bio
 }) => {
 
-
+    const {data: session} = useSession()
+    const [loading, setLoading] = useState(false);
  
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name || "Whats your name",
             bio:bio || "Tell about yourself",
-            link: link || "http://",
+            links: links || "http://",
 
         },
     })
      
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true);
+        try{
+            const update =  await fetch(`http://localhost:3000/api/${session?.user.id}`,{
+                method: "PATCH",
+                headers:{
+                    "contentType": "application/json",
+                },
+                body: JSON.stringify({ ...values, id})
+            })
+            if(update.ok){
+                toast.success('updated')
+            }
+            else{
+                
+                toast.error('Failed to updated')
+            }
+        }catch(error){
+            console.error(error)
+        } finally {
+            setLoading(false);
+        }
         console.log(values)
     }
 
@@ -80,14 +101,11 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
                                         <FormControl>
                                             <Input placeholder={``} {...field} />
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your display name.
-                                        </FormDescription>
 
                                     </FormItem>
                                 )}
                             />
-                            <Separator/>
+                            <Separator className='bg-slate-400'/>
                             <FormField
                                 control={form.control}
                                 name="bio"
@@ -97,31 +115,25 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
                                         <FormControl>
                                             <Input placeholder={``} {...field} />
                                         </FormControl>
-                                        <FormDescription>
-                                            About you
-                                        </FormDescription>
                                     </FormItem>
                                 )}
                                 />
-                            <Separator className=" font-extrabold"/>
+                            <Separator className=" bg-slate-400"/>
                                 
                             <FormField
                                 control={form.control}
-                                name="link"
+                                name="links"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Link</FormLabel>
                                         <FormControl>
-                                            <Input placeholder={``} {...field} />
+                                            <Input placeholder={links} {...field} />
                                         </FormControl>
-                                        <FormDescription>
-                                            Your links
-                                        </FormDescription>
                                     </FormItem>
                                 )}
                             />
                             <DialogFooter>
-                                <Button className="w-full" type="submit">Submit</Button>
+                                <Button className="w-full" type="submit">{loading ? " Updating... ": " Done"}<DialogClose/></Button>
                             </DialogFooter>
                         </form>
                     </Form>

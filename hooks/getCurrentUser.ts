@@ -1,6 +1,7 @@
 
 import { prisma } from '@/prisma/prismaClient';
 import { ExtendedUser } from '@/util/types';
+
 import { redirect } from 'next/navigation';
 
 
@@ -15,7 +16,12 @@ const getCurrentUser = async (userId: string | undefined): Promise<ExtendedUser 
                 id: userId
             },
             include:{
-                profile: true
+                profile: {
+                    include:{
+                        follower: true
+                    }
+                }
+
             }
         })
 
