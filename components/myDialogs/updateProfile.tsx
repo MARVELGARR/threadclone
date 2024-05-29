@@ -25,6 +25,8 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { updateProfileProps } from "@/util/types";
+import { revalidatePath } from "next/cache";
+import { usePathname } from "next/navigation";
 
 
 
@@ -45,6 +47,8 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
 
     const {data: session} = useSession()
     const [loading, setLoading] = useState(false);
+
+    const pathName = usePathname()
  
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -77,13 +81,14 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
         }catch(error){
             console.error(error)
         } finally {
+            window.location.reload()
             setLoading(false);
         }
         console.log(values)
     }
 
     return (
-        <Dialog >
+        <Dialog>
             <DialogTrigger asChild>
                 <Button className={className} variant="outline">Edit Profile</Button>
             </DialogTrigger>
@@ -132,7 +137,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
                                     </FormItem>
                                 )}
                             />
-                            <DialogFooter>
+                            <DialogFooter >
                                 <Button className="w-full" type="submit">{loading ? " Updating... ": " Done"}<DialogClose/></Button>
                             </DialogFooter>
                         </form>
