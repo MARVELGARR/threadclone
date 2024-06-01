@@ -5,9 +5,10 @@ import { Input } from "../ui/input";
 import { AlignRight, Hash, Image, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import {  useState } from "react";
 import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
+import toast from "react-hot-toast";
 
 type ThreadsInputProps = {
     id: number,
@@ -22,6 +23,7 @@ const ThreadInputArea = () => {
     const [tagInput, setTagInput] = useState("");
     const [tagOpen, setTagOpen] = useState<number | null>(null);
     const [imageOpen, setImageOpen] = useState<number | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const handleInputChange = (id: number, value: string) => {
         const newThreads = threads.map(thread =>
@@ -82,8 +84,9 @@ const ThreadInputArea = () => {
 
     const handleSubmit = () => {
         const filteredThreads = threads.filter(thread => thread.value.trim() !== "");
-        console.log("Threads submitted:", filteredThreads);
         setThreads([{ id: 0, value: "", images: [], tags: [] }]);
+
+        handleSend(filteredThreads);
     };
 
     const handleClose = (id: number) => {
@@ -91,8 +94,30 @@ const ThreadInputArea = () => {
         setThreads(newThreads);
     };
 
-    const handleSend = async() =>{
 
+    const handleSend = async(filteredThreads: ThreadsInputProps[]) =>{
+        setLoading(true)
+        try{
+            const Post = await fetch(`http://localhost:3000/api/${session?.user.id}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify( { threads: filteredThreads })
+            })
+            if(Post.ok){
+                toast.success('Thread posted')
+            }
+            else{
+                toast.error('Failed to create thread')
+            }
+        }
+        catch(error){
+            console.error(error);
+        }finally {
+
+            setLoading(false);
+        }
     }
     
 
