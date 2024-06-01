@@ -25,7 +25,6 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { updateProfileProps } from "@/util/types";
-import { revalidatePath } from "next/cache";
 import { usePathname } from "next/navigation";
 
 
