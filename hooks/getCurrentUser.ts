@@ -18,7 +18,8 @@ const getCurrentUser = async (userId: string | undefined): Promise<ExtendedUser 
             include:{
                 profile: {
                     include:{
-                        follower: true
+                        follower: true,
+                        following: true
                     }
                 }
 

@@ -1,9 +1,24 @@
 import { prisma } from "@/prisma/prismaClient";
-import { Post } from "@prisma/client";
+import { ExtendedPost } from "@/util/types";
+
 import { redirect } from "next/navigation";
-export async function useGetAllPosts( userId?: string): Promise<Post[]>{
+export async function useGetAllPosts( userId?: string): Promise<ExtendedPost[]>{
     try{
-        const responds = await prisma.post.findMany()
+        const responds = await prisma.post.findMany({
+            include: {
+                like: true,
+                user: {
+                    include :{
+                        profile: {
+                            include: {
+                                follower: true,
+                          },
+                        }
+                    }
+                }
+
+            }
+        })
         return responds   
     }
     catch (error) {

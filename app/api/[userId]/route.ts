@@ -60,10 +60,6 @@ export async function POST(req: Request, { params }: { params: { userId: string 
             userId: params.userId,
         };
 
-        if (threads[0]?.threadId) {
-            postData.threadId = threads[0].threadId;
-        }
-
         const newPost = await prisma.post.create({
             data: postData,
         });

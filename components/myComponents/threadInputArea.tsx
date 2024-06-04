@@ -2,10 +2,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useSession } from "next-auth/react";
 import { Input } from "../ui/input";
-import { AlignRight, Hash, Image, X } from "lucide-react";
+import { Image, Hash, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import {  useState } from "react";
+import { useState } from "react";
 import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import toast from "react-hot-toast";
@@ -83,10 +83,8 @@ const ThreadInputArea = () => {
     };
 
     const handleSubmit = () => {
-        const filteredThreads = threads.filter(thread => thread.value.trim() !== "");
+        handleSend(threads);
         setThreads([{ id: 0, value: "", images: [], tags: [] }]);
-
-        handleSend(filteredThreads);
     };
 
     const handleClose = (id: number) => {
@@ -94,113 +92,111 @@ const ThreadInputArea = () => {
         setThreads(newThreads);
     };
 
-
-    const handleSend = async(filteredThreads: ThreadsInputProps[]) =>{
-        setLoading(true)
-        try{
-            const Post = await fetch(`http://localhost:3000/api/${session?.user.id}`, {
+    const handleSend = async (filteredThreads: ThreadsInputProps[]) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:3000/api/${session?.user.id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify( { threads: filteredThreads })
-            })
-            if(Post.ok){
-                toast.success('Thread posted')
-            }
-            else{
-                toast.error('Failed to create thread')
-            }
-        }
-        catch(error){
-            console.error(error);
-        }finally {
+                body: JSON.stringify({ threads: filteredThreads }),
+            });
 
+            if (response.ok) {
+                toast.success('Thread posted');
+            } else {
+                const errorData = await response.json();
+                toast.error(`Failed to create thread: ${errorData.message || response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('Failed to create thread: Network error or server unreachable');
+        } finally {
             setLoading(false);
         }
-    }
-    
+    };
 
     return (
-        <div className="w-full">
-            <div className="flex items-center w-full">
-                <div className="flex flex-col w-full">
-                    <div className="flex flex-col gap-[3rem]">
-                        {threads.map((thread, index) => (
-                            <div key={index} className="flex flex-col items-center gap-3 relative">
-                                { index > 0 && (<X className=" cursor-pointer absolute right-5 top-7" onClick={()=>handleClose(index)}/>)}
-                                <div className="w-full flex flex-col items-center">
-                                    <div className="w-full flex items-center gap-[1rem] relative">
-
-                                        <Avatar className="w-[4rem] h-[4rem]">
-                                            <AvatarImage src={session?.user.image}></AvatarImage>
-                                            <AvatarFallback>CN</AvatarFallback>
-                                        </Avatar>
-
-                                        <div className="flex flex-col items-center gap-2 pt-2">
-                                            <div className="font-bold text-2xl text-start w-full">{session?.user.name}</div>
-                                            <Input
-                                                className="w-[37rem] border-0"
-                                                placeholder="Start a thread"
-                                                value={thread.value}
-                                                onChange={(e) => handleInputChange(index, e.target.value)}
-                                            />
-                                            
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col w-full">
-                                            
-                                        <div className="flex flex-wrap gap-2 mt-2 ml-32">
-                                                {thread.images.map((image, imageIndex) => (
-                                                    <div key={imageIndex} className="relative">
-                                                        <img src={image} alt="thread image" className="w-[10rem] h-[10rem] object-cover rounded" />
-                                                        <X className="absolute top-0 right-0 cursor-pointer" onClick={() => handleRemoveImage(index, imageIndex)} />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div className="flex w-full justify-end flex-wrap gap-2 mt-2">
-                                                {thread.tags.map((tag, tagIndex) => (
-                                                    <div key={tagIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded">
-                                                        <span>{tag}</span>
-                                                        <X className="cursor-pointer" size={12} onClick={() => handleRemoveTag(index, tagIndex)} />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div className={cn(imageOpen === index ? "mt-2" : "hidden")}>
-                                                <UploadButton<OurFileRouter>
-                                                    endpoint="imageUploader"
-                                                    onUploadComplete={(files) => {
-                                                        files.forEach(file => handleAddImage(index, file.url));
-                                                    }}
-                                                    onClientUploadComplete={(files) => {
-                                                        files.forEach(file => handleAddImage(index, file.url));
-                                                    }}
-                                                />
-                                            </div>
-                                            <div className={cn(tagOpen === index ? "mt-2" : 'hidden')}>
-                                                <Input
-                                                    placeholder="Add a tag"
-                                                    value={tagInput}
-                                                    onChange={(e) => setTagInput(e.target.value)}
-                                                    onKeyDown={(e) => e.key === 'Enter' && handleAddTag(index, tagInput)}
-                                                />
-                                            </div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center w-full justify-start ml-32 gap-5">
-                                    <Image className="stroke-gray-400 cursor-pointer rotate-12" onClick={() => handleImageOpen(index)} />
-                                    <Hash onClick={() => handleTagOpen(index)} className="stroke-gray-400 cursor-pointer rotate-12" />
-                                </div>
+        <div className="w-full p-4">
+            <div className="flex flex-col w-full">
+                {threads.map((thread, index) => (
+                    <div key={index} className="flex flex-col items-start gap-3 relative border-b border-gray-200 pb-4 mb-4">
+                        {index > 0 && (
+                            <X className="cursor-pointer absolute right-5 top-5" onClick={() => handleClose(thread.id)} />
+                        )}
+                        <div className="flex items-start gap-3 w-full">
+                            <div className="relative">
+                                <Avatar className="w-12 h-12">
+                                    <AvatarImage src={session?.user.image} />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                                {index < threads.length - 1 && (
+                                    <div className="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300" />
+                                )}
                             </div>
-                        ))}
+                            <div className="flex-1">
+                                <div className="font-bold text-xl">{session?.user.name}</div>
+                                <Input
+                                    className="border-b-2 w-full p-2 text-lg"
+                                    placeholder="Start a thread"
+                                    value={thread.value}
+                                    onChange={(e) => handleInputChange(thread.id, e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-2 pl-16">
+                            {thread.images.map((image, imageIndex) => (
+                                <div key={imageIndex} className="relative">
+                                    <img src={image} alt="thread image" className="w-24 h-24 object-cover rounded" />
+                                    <X className="absolute top-1 right-1 cursor-pointer" onClick={() => handleRemoveImage(thread.id, imageIndex)} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-2 pl-16">
+                            {thread.tags.map((tag, tagIndex) => (
+                                <div key={tagIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded">
+                                    <span>{tag}</span>
+                                    <X className="cursor-pointer" size={12} onClick={() => handleRemoveTag(thread.id, tagIndex)} />
+                                </div>
+                            ))}
+                        </div>
+                        {imageOpen === thread.id && (
+                            <div className="mt-2 pl-16 w-full">
+                                <UploadButton<OurFileRouter>
+                                    endpoint="imageUploader"
+                                    onUploadComplete={(files) => {
+                                        files.forEach((file) => handleAddImage(thread.id, file.url));
+                                    }}
+                                    onClientUploadComplete={(files) => {
+                                        files.forEach((file) => handleAddImage(thread.id, file.url));
+                                    }}
+                                />
+                            </div>
+                        )}
+                        {tagOpen === thread.id && (
+                            <div className="mt-2 pl-16 w-full">
+                                <Input
+                                    placeholder="Add a tag"
+                                    value={tagInput}
+                                    onChange={(e) => setTagInput(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleAddTag(thread.id, tagInput)}
+                                />
+                            </div>
+                        )}
+                        <div className="flex items-center w-full justify-start mt-2 pl-16 gap-5">
+                            <Image className="stroke-gray-400 cursor-pointer" onClick={() => handleImageOpen(thread.id)} />
+                            <Hash onClick={() => handleTagOpen(thread.id)} className="stroke-gray-400 cursor-pointer" />
+                        </div>
                     </div>
-                </div>
+                ))}
             </div>
             <div className="w-full pt-6 flex items-center justify-end">
                 <Button
                     type="button"
                     onClick={handleSubmit}
                     className="bg-blue-500 text-white rounded hover:bg-blue-600"
+                    disabled={loading}
                 >
                     Submit
                 </Button>
