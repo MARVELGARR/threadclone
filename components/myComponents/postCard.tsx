@@ -4,10 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import ProfileCard from "./profileCard";
+import Link from "next/link";
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, follower }) => {
+const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [isHovered, setIsHovered] = useState(false);
 
     const openModal = (image: string) => {
         setSelectedImage(image);
@@ -22,7 +25,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, followe
     const isThread = story.length > 1;
 
     return (
-        <div className={`p-4 bg-white shadow rounded-lg w-full max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`}>
+        <div className={`p-4 z-9 bg-white shadow rounded-lg w-full max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`}>
             <div className="flex items-start gap-4 w-full relative">
                 <Avatar className="w-12 h-12">
                     <AvatarImage src={user.image || undefined} />
@@ -30,10 +33,21 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, followe
                 </Avatar>
                 <div className="flex flex-col w-full">
                     <div className="flex items-center justify-between w-full">
-                        <div className="font-bold">{user.name}</div>
+                        <Link 
+                            href={'sd'}
+                            className="font-bold relative cursor-pointer hover:underline"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            {user.name}
+                            {isHovered && (
+                                <div className="absolute z-50 top-0 left-0 mt-2">
+                                    <ProfileCard user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
+                                </div>
+                            )}
+                        </Link>
 
                         <div className="flex items-center">...</div>
-                        
                     </div>
                     <div className="mt-2 space-y-2">
                         <div className="break-words max-w-[500px]">
@@ -45,7 +59,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, followe
                                     <Image
                                         src={image}
                                         fill
-                                        className="object-cover rounded"
+                                        className="object-cover z-10 rounded"
                                         alt={`Thread image ${index + 1}`}
                                     />
                                 </div>

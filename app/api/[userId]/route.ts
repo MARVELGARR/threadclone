@@ -9,7 +9,7 @@ export async function PATCH(req: Request, { params }: { params: { userId: string
     try {
         const profile = await prisma.profile.findFirst({
             where: {
-                id,
+                userId: params.userId
             },
         });
 
@@ -38,7 +38,7 @@ export async function PATCH(req: Request, { params }: { params: { userId: string
         }
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: 'An error occurred while updating the profile.' }, { status: 500 });
+        return NextResponse.json({ message: 'An error occurred while updating the profile.', error: error }, { status: 500 });
     }
 }
 

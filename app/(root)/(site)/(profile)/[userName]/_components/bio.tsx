@@ -13,7 +13,7 @@ import Link from "next/link";
 
 
 
-const Bio = ({data,}: {
+const Bio = ({data}: {
     data: ExtendedUser | null
 }) => {
     const session = useSession()

@@ -20,7 +20,7 @@ const HomePage = async () => {
                             images={post.images}
                             tags={post.tags}
                             user={post.user}
-                            follower={post.user.profile?.followers || []}
+                            
                         />
                     )
                 })}

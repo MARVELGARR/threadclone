@@ -24,9 +24,9 @@ import { Separator } from "../ui/separator";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { updateProfileProps } from "@/util/types";
-import { usePathname } from "next/navigation";
 
+import { usePathname } from "next/navigation";
+import { updateProfileProps } from "@/util/types";
 
 
 
@@ -80,7 +80,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
         }catch(error){
             console.error(error)
         } finally {
-            window.location.reload()
+
             setLoading(false);
         }
         console.log(values)

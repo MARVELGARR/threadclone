@@ -4,6 +4,8 @@ import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
 import Bio from "./_components/bio";
 import ReplyRepost from "@/components/myComponents/reply_repost";
+import { redirect } from "next/navigation";
+
 
 
 
@@ -13,7 +15,10 @@ export default async function ProfilePage({params, children}:{
     }, 
     children: React.ReactNode
 }){
-    
+    const session = await getServerSession(authOptions)
+    if(!session){
+        redirect('/login')
+    }
     const currentUser = await wait()
     if(!currentUser){
         return (
