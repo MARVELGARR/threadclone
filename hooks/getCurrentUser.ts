@@ -1,36 +1,33 @@
-
 import { prisma } from '@/prisma/prismaClient';
 import { ExtendedUser } from '@/util/types';
 
-import { redirect } from 'next/navigation';
+const getCurrentUser = async (userId: string | null): Promise<ExtendedUser | null> => {
+    if (!userId) {
+        console.error('getCurrentUser: userId is null or undefined');
+        return null;
+    }
 
-
-
-
-
-const getCurrentUser = async (userId: string | undefined): Promise<ExtendedUser | null> => {
     try {
-
         const user = await prisma.user.findUnique({
             where: {
                 id: userId
             },
-            include:{
+            include: {
                 profile: {
-                    include:{
+                    include: {
                         follower: true,
                         following: true
                     }
                 }
-
             }
-        })
+        });
 
-        return user;
-        
+
+        return user as ExtendedUser;
+
     } catch (error) {
-        console.error(error);
-        redirect('/')
+        console.error('getCurrentUser: Error fetching user', error);
+        return null;
     }
 }
 

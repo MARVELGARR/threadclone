@@ -75,4 +75,32 @@ export async function POST(req: Request, { params }: { params: { userId: string 
     }
 }
 
+export async function GET(req: Request, { params }: {params: {userId: string}}){
+    try{
+        const currentUser = await prisma.user.findUnique({
+            where:{
+                id: params.userId
+            },
+            include: {
+                profile: {
+                    include: {
+                        follower: true,
+                        following: true
+                    }
+                }
+            }
+        })
+        if(currentUser){
+            return NextResponse.json({message: 'current user gotten'}, {status: 200})
+        }
+        else{
+                
+            return NextResponse.json({message: 'eUser not found'}, {status: 401})
+        }
+    }
+    catch(error){
+        return NextResponse.json({message: 'error current user'}, {status: 500})
+            
+    }
+}
     

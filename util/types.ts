@@ -26,6 +26,7 @@ export type PostCardProps = {
   images: string[],
   tags: string[],
   user: ExtendedUser,
+  currentUser?: ExtendedUser
   follower?: Followers[]
   profile?: ExtendedProfile
 }

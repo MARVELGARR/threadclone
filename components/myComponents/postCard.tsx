@@ -6,8 +6,9 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import ProfileCard from "./profileCard";
 import Link from "next/link";
+import { ExtendedUser } from '../../util/types';
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user }) => {
+const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, currentUser}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -33,8 +34,8 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user }) => {
                 </Avatar>
                 <div className="flex flex-col w-full">
                     <div className="flex items-center justify-between w-full">
-                        <Link 
-                            href={'sd'}
+                        <div 
+                            
                             className="font-bold relative cursor-pointer hover:underline"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
@@ -42,10 +43,10 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user }) => {
                             {user.name}
                             {isHovered && (
                                 <div className="absolute z-50 top-0 left-0 mt-2">
-                                    <ProfileCard user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
+                                    <ProfileCard currentUser={currentUser as ExtendedUser} user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
                                 </div>
                             )}
-                        </Link>
+                        </div>
 
                         <div className="flex items-center">...</div>
                     </div>
