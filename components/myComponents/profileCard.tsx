@@ -5,39 +5,18 @@ import { useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ExtendedUser } from "@/util/types";
 import { Button } from "../ui/button";
-import toast from "react-hot-toast";
 
-const ProfileCard = ({ user, className, currentUser }: {
-    user: ExtendedUser, className?: string, currentUser: ExtendedUser
+
+const ProfileCard = ({ user, className, follow, isFollowing, unfollow, currentUser }: {
+    user: ExtendedUser, className?: string, currentUser: ExtendedUser, isFollowing: boolean, unfollow: ()=> void, follow: ()=> void,
 }) => {
-
     const { data: session } = useSession();
 
-    const PostUserProfile = user.profile?.id;
-    const isNotMyPost = user.profile?.userId !== currentUser.id;
+    const isMyPost = user.profile?.userId == currentUser?.id;
 
-    // Ensure followers is an array
-    const followers = user.profile?.followers ?? [];
-    const alreadyFollowed = followers.some(follow => follow.followingId === PostUserProfile);
 
-    const handleFollow = async () => {
-        try {
-            const follow = await fetch(`/api/follow`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ followingId: PostUserProfile, followerId: currentUser?.profile?.id }),
-            });
-            if (follow.ok) {
-                toast.success("Followed");
-            } else {
-                toast.error("Failed to follow");
-            }
-        } catch (error) {
-            toast.error("Failed to follow");
-        }
-    };
+
+   
 
     if (session) {
         return (
@@ -57,18 +36,17 @@ const ProfileCard = ({ user, className, currentUser }: {
                     <div className="flex items-center">
                         <div></div>
                         <div className="text-sm font-thin">
-                            {followers.length} Followers
+                            {JSON.stringify(user.profile?.follower.length)} Followers
                         </div>
                     </div>
                 </div>
-                {isNotMyPost && (
+                {!isMyPost && (
                     <Button 
                         type="button" 
-                        onClick={handleFollow} 
-                        disabled={alreadyFollowed} 
+                        onClick={isFollowing ? unfollow : follow} 
                         className="w-full" 
-                        variant={alreadyFollowed ? "default" : "outline"}>
-                        {alreadyFollowed ? 'Followed' : 'Follow'}
+                        variant={isFollowing ? "outline" : "default"}>
+                        {isFollowing ? 'Unfollow' : 'Follow'}
                     </Button>
                 )}
             </div>
@@ -78,6 +56,6 @@ const ProfileCard = ({ user, className, currentUser }: {
             <div className="">Error</div>
         );
     }
-}
+};
 
 export default ProfileCard;

@@ -65,9 +65,8 @@ model Followers{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   followerId    String   @db.ObjectId
   followingId   String   @db.ObjectId
-  follower      Profile  @relation("followerRelation",fields: [followerId], references: [id], onDelete: Cascade)
-  following     Profile  @relation("followingRelation",fields: [followingId], references: [id], onDelete: Cascade)
-
+  follower      Profile  @relation("followerRelation",fields: [followingId], references: [id], onDelete: Cascade)
+  following     Profile  @relation("followingRelation",fields: [followerId], references: [id], onDelete: Cascade)
   status String
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt

@@ -6,6 +6,7 @@ import getCurrentUser from "@/hooks/getCurrentUser";
 import { useGetAllPosts } from "@/hooks/getPosts";
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 
 
@@ -18,7 +19,6 @@ const HomePage = async () => {
         return (
             <div className="">
                 <CreatePost className=' border-b-2 pb-[2rem]'/>
-                <div className="">{JSON.stringify(currentUser)}</div>
                 <div className="flex flex-col gap-2">
                     {posts.map((post, index)=>{
                         return(

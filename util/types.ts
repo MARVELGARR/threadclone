@@ -6,7 +6,7 @@ declare global {
 }
 
 export type ExtendedProfile = Profile & { 
-  followers: Followers[], 
+  follower: Followers[], 
   following: Followers[] 
 };
 

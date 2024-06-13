@@ -2,12 +2,14 @@ import { prisma } from '@/prisma/prismaClient';
 import { ExtendedUser } from '@/util/types';
 
 const getCurrentUser = async (userId: string | null): Promise<ExtendedUser | null> => {
+
     if (!userId) {
         console.error('getCurrentUser: userId is null or undefined');
         return null;
     }
 
     try {
+        
         const user = await prisma.user.findUnique({
             where: {
                 id: userId

@@ -7,8 +7,9 @@ import { useState } from "react";
 import ProfileCard from "./profileCard";
 import Link from "next/link";
 import { ExtendedUser } from '../../util/types';
+import useFollowStatus from "@/hooks/useFollowStatus";
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, currentUser}) => {
+const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, user, currentUser}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -24,6 +25,19 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, current
     };
 
     const isThread = story.length > 1;
+
+    const PostUserProfileId = user.profile?.id;
+
+    if(!currentUser?.profile?.id) {
+        return 
+    }
+    if(!PostUserProfileId) {
+        return 
+    }
+
+
+    const { isFollowing, follow, unfollow } = useFollowStatus(currentUser?.profile?.id, PostUserProfileId);
+
 
     return (
         <div className={`p-4 z-9 bg-white shadow rounded-lg w-full max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`}>
@@ -43,7 +57,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, tags, user, current
                             {user.name}
                             {isHovered && (
                                 <div className="absolute z-50 top-0 left-0 mt-2">
-                                    <ProfileCard currentUser={currentUser as ExtendedUser} user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
+                                    <ProfileCard isFollowing={isFollowing} follow={follow} unfollow={unfollow} currentUser={currentUser as ExtendedUser} user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
                                 </div>
                             )}
                         </div>

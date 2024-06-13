@@ -19,7 +19,7 @@ export async function useGetAllPosts( userId?: string): Promise<ExtendedPost[]>{
 
             }
         })
-        return responds   
+        return responds
     }
     catch (error) {
         console.error(error);
