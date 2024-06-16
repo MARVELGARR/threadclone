@@ -1,10 +1,12 @@
 // hooks/useFollowStatus.js
-
+'use client'
+'use client'
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
-const useFollowStatus = (followerId : string, followingId: string) => {
+export default function useFollowStatus(followerId: string, followingId: string) {
     const [isFollowing, setIsFollowing] = useState(false);
+    const [followerCount, setFollowerCount] = useState(0);
 
     useEffect(() => {
         const checkFollowStatus = async () => {
@@ -20,6 +22,7 @@ const useFollowStatus = (followerId : string, followingId: string) => {
                 if (response.ok) {
                     const data = await response.json();
                     setIsFollowing(data.isFollowing);
+                    setFollowerCount(data.followerCount);
                 } else {
                     toast.error("Failed to check follow status");
                 }
@@ -75,7 +78,8 @@ const useFollowStatus = (followerId : string, followingId: string) => {
         }
     };
 
-    return { isFollowing, follow, unfollow };
-};
+    return { isFollowing, followerCount, follow, unfollow };
+}
 
-export default useFollowStatus;
+
+

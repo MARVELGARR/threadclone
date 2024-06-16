@@ -1,18 +1,18 @@
+
+
+
 'use client'
 import { PostCardProps } from "@/util/types";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+
 import Image from "next/image";
 import { useState } from "react";
-import ProfileCard from "./profileCard";
-import { ExtendedUser } from '../../util/types';
 
-import Link from "next/link";
-import useFollowStatus from "@/hooks/useFollowStatus";
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, user, currentUser}) => {
+import { Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+
+const PostCards: React.FC<PostCardProps> = ({ story, images,  tags, user}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [isHovered, setIsHovered] = useState(false);
 
     const openModal = (image: string) => {
         setSelectedImage(image);
@@ -28,15 +28,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, use
 
     const PostUserProfileId = user.profile?.id;
 
-    if(!currentUser?.profile?.id) {
-        return 
-    }
-    if(!PostUserProfileId) {
-        return 
-    }
 
-
-    const { isFollowing, followerCount, follow, unfollow } = useFollowStatus(currentUser?.profile?.id, PostUserProfileId);
 
 
     return (
@@ -48,19 +40,12 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, use
                 </Avatar>
                 <div className="flex flex-col w-full">
                     <div className="flex items-center justify-between w-full">
-                        <Link 
-                            href={`/user/${user.id}`}
+                        <div 
+                            
                             className="font-bold relative cursor-pointer hover:underline"
-                            onMouseEnter={() => setIsHovered(true)}
-                            onMouseLeave={() => setIsHovered(false)}
                         >
                             {user.name}
-                            {isHovered && (
-                                <div className="absolute z-50 top-0 left-0 mt-2">
-                                    <ProfileCard followerCount={followerCount} isFollowing={isFollowing} follow={follow} unfollow={unfollow} currentUser={currentUser as ExtendedUser} user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
-                                </div>
-                            )}s
-                        </Link>
+                        </div>
 
                         <div className="flex items-center">...</div>
                     </div>

@@ -1,11 +1,15 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-
+import PostCards from "@/components/myComponents/postCard";
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import PostCards from "./_components/myPostCard";
 
-const Threads = async () => {
+
+const UsersThreads = async ({params}:{
+    params:{
+        userId: string
+    }
+}) => {
 
     const session = await getServerSession(authOptions)
     if(!session){
@@ -14,7 +18,7 @@ const Threads = async () => {
 
     const posts = await prisma?.post.findMany({
         where:{
-            userId: session.user.id
+            userId: params.userId
         },
         include:{
             user: {
@@ -50,4 +54,4 @@ const Threads = async () => {
 
 }
  
-export default Threads
+export default UsersThreads

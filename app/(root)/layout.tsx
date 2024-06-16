@@ -3,8 +3,8 @@ import Header from "@/components/myComponents/header";
 import MobileNav from "@/components/myComponents/mobile-nav";
 
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { redirect } from "next/navigation";
+
 
 
 const PageLayout = ({children}: {children: React.ReactNode}) => {
@@ -18,9 +18,9 @@ const PageLayout = ({children}: {children: React.ReactNode}) => {
     return (
         <div className="w-full">
 
-            <Header className='py-4'/>
+            <Header className='py-4 sticky top-0 bg-white z-50'/>
             <MobileNav className=" lg:hidden"/>
-            <div className="">
+            <div className=" overflow-y">
                 {children}
             </div>
         </div>
