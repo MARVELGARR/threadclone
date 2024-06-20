@@ -1,3 +1,4 @@
+'use server'
 import { prisma } from '@/prisma/prismaClient';
 import { ExtendedUser } from '@/util/types';
 

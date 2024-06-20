@@ -27,6 +27,7 @@ model User {
   account        Account[]
   profile Profile?
   post Post[]
+  reply Reply[]
   thread Thread[]
 }
 
@@ -87,9 +88,22 @@ model Post{
 
 }
 
+model Reply{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  story String[]
+  images String[]
+  tags String[]
+  userId String @db.ObjectId 
+  user User @relation(fields: [userId], references: [id])
+  like Like[]
+  threadId  String?   @db.ObjectId
+  thread    Thread?   @relation(fields: [threadId], references: [id], onDelete: Cascade)
+}
+
 model Thread {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  posts     Post[]   
+  posts     Post[]
+  reply Reply[]   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String   @db.ObjectId
@@ -100,4 +114,7 @@ model Like{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   postId String @db.ObjectId @unique
   post Post @relation(fields: [postId], references: [id])
+  replyId String @db.ObjectId @unique
+  reply Reply @relation(fields: [replyId], references: [id])
+
 }

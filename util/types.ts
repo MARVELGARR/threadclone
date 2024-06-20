@@ -22,6 +22,7 @@ export interface ExtendedPost extends Post {
 
 
 export type PostCardProps = {
+  id?: string;
   story: string[],
   images: string[],
   tags: string[],
@@ -29,6 +30,16 @@ export type PostCardProps = {
   currentUser?: ExtendedUser
   follower?: Followers[]
   profile?: ExtendedProfile
+}
+
+export type profileCardProps = {
+  user: ExtendedUser, 
+  followerCount: number, 
+  className?: string, 
+  currentUser: ExtendedUser, 
+  isFollowing: boolean, 
+  unfollow: ()=> void, 
+  follow: ()=> void,
 }
 
 export type updateProfileProps ={

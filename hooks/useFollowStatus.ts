@@ -1,42 +1,42 @@
 // hooks/useFollowStatus.js
+
 'use client'
-'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 
-export default function useFollowStatus(followerId: string, followingId: string) {
+export default function useFollowStatus(followerId: string | null, followingId: string | null) {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followerCount, setFollowerCount] = useState(0);
 
-    useEffect(() => {
-        const checkFollowStatus = async () => {
-            try {
-                const response = await fetch(`/api/checkFollow`, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ followerId, followingId }),
-                });
+    const checkFollowStatus = useCallback(async () => {
+        try {
+            const response = await fetch(`/api/checkFollow`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ followerId, followingId }),
+            });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setIsFollowing(data.isFollowing);
-                    setFollowerCount(data.followerCount);
-                } else {
-                    toast.error("Failed to check follow status");
-                }
-            } catch (error) {
+            if (response.ok) {
+                const data = await response.json();
+                setIsFollowing(data.isFollowing);
+                setFollowerCount(data.followerCount);
+            } else {
                 toast.error("Failed to check follow status");
             }
-        };
+        } catch (error) {
+            toast.error("Failed to check follow status");
+        }
+    }, [followerId, followingId, followerCount]);
 
+    useEffect(() => {
         if (followerId && followingId) {
             checkFollowStatus();
         }
     }, [followerId, followingId]);
 
-    const follow = async () => {
+    const follow = useCallback(async () => {
         try {
             const response = await fetch(`/api/follow`, {
                 method: 'POST',
@@ -55,12 +55,12 @@ export default function useFollowStatus(followerId: string, followingId: string)
         } catch (error) {
             toast.error("Failed to follow");
         }
-    };
+    }, [followingId, followerId]);
 
-    const unfollow = async () => {
+    const unfollow = useCallback(async () => {
         try {
             const response = await fetch(`/api/follow`, {
-                method: 'DELETE',
+                method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -76,7 +76,7 @@ export default function useFollowStatus(followerId: string, followingId: string)
         } catch (error) {
             toast.error("Failed to unfollow");
         }
-    };
+    }, [followingId, followerId]);
 
     return { isFollowing, followerCount, follow, unfollow };
 }

@@ -5,19 +5,20 @@ import useFollowStatus from '@/hooks/useFollowStatus';
 import { Button } from '../ui/button';
 
 interface FollowStatusProps {
-    currentUser: any;
-    user: any;
+    isFollowing: Boolean;
+    unfollow: ()=>void;
+    follow: ()=>void;
+    className: string;
 }
 
-const FollowUnfollow: React.FC<FollowStatusProps> = ({ currentUser, user }) => {
-    const { isFollowing, follow, unfollow } = useFollowStatus(currentUser.profile.id, user.profile.id);
+const FollowUnfollow: React.FC<FollowStatusProps> = ({follow, unfollow, isFollowing, className }) => {
 
     return (
-        <div>
+        <div className={className}>
             {isFollowing ? (
-                <Button className='w-[4rem] p-3' variant={'outline'} onClick={unfollow}>Unfollow</Button>
+                <Button className='w-full p-3' variant={'outline'} onClick={unfollow}>Unfollow</Button>
             ) : (
-                <Button className='w-[4rem] p-3' variant={'default'} onClick={follow}>Follow</Button>
+                <Button className='w-full p-3' variant={'default'} onClick={follow}>Follow</Button>
             )}
         </div>
     );

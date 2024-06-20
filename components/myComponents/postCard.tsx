@@ -8,8 +8,10 @@ import { ExtendedUser } from '../../util/types';
 
 import Link from "next/link";
 import useFollowStatus from "@/hooks/useFollowStatus";
+import PostOption from "./postOption";
+import PostInteractions from "./postInteractions";
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, user, currentUser}) => {
+const PostCards: React.FC<PostCardProps> = ({ story, images, follower, id, tags, user, currentUser}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -28,22 +30,16 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, use
 
     const PostUserProfileId = user.profile?.id;
 
-    if(!currentUser?.profile?.id) {
-        return 
-    }
-    if(!PostUserProfileId) {
-        return 
-    }
 
 
-    const { isFollowing, followerCount, follow, unfollow } = useFollowStatus(currentUser?.profile?.id, PostUserProfileId);
+    const { isFollowing, followerCount, follow, unfollow } = useFollowStatus(currentUser?.profile?.id || null, PostUserProfileId || null);
 
 
     return (
         <div className={`p-4 z-9 bg-white shadow rounded-lg w-full max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`}>
             <div className="flex items-start gap-4 w-full relative">
                 <Avatar className="w-12 h-12">
-                    <AvatarImage src={user.image || undefined} />
+                    <AvatarImage  src={user.image || undefined} />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col w-full">
@@ -62,7 +58,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, use
                             )}s
                         </Link>
 
-                        <div className="flex items-center">...</div>
+                        <PostOption postId={id}/>
                     </div>
                     <div className="mt-2 space-y-2">
                         <div className="break-words max-w-[500px]">
@@ -76,6 +72,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, use
                                         fill
                                         className="object-cover z-10 rounded"
                                         alt={`Thread image ${index + 1}`}
+                                        
                                     />
                                 </div>
                             ))}
@@ -112,6 +109,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, tags, use
                     </div>
                 </div>
             )}
+            <PostInteractions/>
         </div>
     );
 }

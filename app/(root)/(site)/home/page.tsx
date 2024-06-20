@@ -6,7 +6,6 @@ import getCurrentUser from "@/hooks/getCurrentUser";
 import { useGetAllPosts } from "@/hooks/getPosts";
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
 
 
 
