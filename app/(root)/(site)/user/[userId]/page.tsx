@@ -27,7 +27,8 @@ const UsersThreads = async ({params}:{
                 include: {
                     profile: true
                 }
-            }
+            },
+            like: true
         }
         
         
@@ -39,7 +40,6 @@ const UsersThreads = async ({params}:{
 
     return (
         <div className="flex flex-col gap-3 mt-2">
-            
             {posts.map((post)=>{
                 return (
                     <PostCards
@@ -48,6 +48,7 @@ const UsersThreads = async ({params}:{
                         story={post.story}
                         tags={post.tags}
                         user={post.user as ExtendedUser}
+                        like={post.like}
                     />
                 )
             })}

@@ -30,6 +30,8 @@ export type PostCardProps = {
   currentUser?: ExtendedUser
   follower?: Followers[]
   profile?: ExtendedProfile
+  like?: Like[]
+
 }
 
 export type profileCardProps = {

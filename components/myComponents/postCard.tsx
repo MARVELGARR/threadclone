@@ -10,11 +10,15 @@ import Link from "next/link";
 import useFollowStatus from "@/hooks/useFollowStatus";
 import PostOption from "./postOption";
 import PostInteractions from "./postInteractions";
+import { Session } from "inspector";
+import { useSession } from "next-auth/react";
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, follower, id, tags, user, currentUser}) => {
+const PostCards: React.FC<PostCardProps> = ({ story, images, follower, like, id, tags, user, currentUser}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false);
+
+    const {data: session} = useSession()
 
     const openModal = (image: string) => {
         setSelectedImage(image);
@@ -30,7 +34,9 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, id, tags,
 
     const PostUserProfileId = user.profile?.id;
 
-
+    const likeCount = like?.filter((like) => like.status === 'liked')?.length
+    const Liked = like?.find((item)=> item.userId === session?.user.id)
+    const isLiked = Liked?.status === 'liked'
 
     const { isFollowing, followerCount, follow, unfollow } = useFollowStatus(currentUser?.profile?.id || null, PostUserProfileId || null);
 
@@ -109,7 +115,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, id, tags,
                     </div>
                 </div>
             )}
-            <PostInteractions/>
+            <PostInteractions isLiked={isLiked} likeCount={likeCount} id={id}/>
         </div>
     );
 }
