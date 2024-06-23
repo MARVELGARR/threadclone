@@ -9,9 +9,11 @@ import { getServerSession } from "next-auth";
 
 
 
+
 const HomePage = async () => {
     const session = await getServerSession(authOptions)
     const  posts  = await useGetAllPosts()
+
     if(session){
 
         const currentUser = await getCurrentUser(session?.user.id)
@@ -28,7 +30,7 @@ const HomePage = async () => {
                                 tags={post.tags}
                                 user={post.user}
                                 currentUser = {currentUser as ExtendedUser}
-                                
+                                postId={post.id}
                             />
                         )
                     })}

@@ -23,6 +23,7 @@ export interface ExtendedPost extends Post {
 
 export type PostCardProps = {
   id?: string;
+  postId?: string;
   story: string[],
   images: string[],
   tags: string[],
@@ -31,6 +32,21 @@ export type PostCardProps = {
   follower?: Followers[]
   profile?: ExtendedProfile
   like?: Like[]
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+export type commentCardProps={
+  commentId?: string;
+  postId?: string;
+  story: string[],
+  images?: string[],
+  tags?: string[],
+  user: ExtendedUser,
+  currentUser?: ExtendedUser
+  follower?: Followers[]
+  profile?: ExtendedProfile
+  like?: Like[]
+  className?: string
 
 }
 

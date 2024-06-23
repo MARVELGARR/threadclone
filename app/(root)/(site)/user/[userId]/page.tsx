@@ -28,7 +28,8 @@ const UsersThreads = async ({params}:{
                     profile: true
                 }
             },
-            like: true
+            like: true,
+            reply:true
         }
         
         

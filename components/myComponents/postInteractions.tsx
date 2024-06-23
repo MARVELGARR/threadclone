@@ -5,16 +5,18 @@ import { Heart, MessageCircle, RepeatIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import {useState } from "react";
 import toast from "react-hot-toast";
+import CommentInputArea from "./commentImpuntArea";
+import useIsOpen from "@/hooks/useOpen";
 
 type PostinteractionProps = {
-    id: string,
-    className: string
+    id?: string,
+    className?: string
     like?: Like[]
     isLiked: boolean
-    likeCount: number
+    likeCount?: number
 }
 
-const PostInteractions: React.FC<PostinteractionProps> = ({id, like, likeCount, isLiked, className}) => {
+const PostInteractions: React.FC<PostinteractionProps> = ({id, likeCount, isLiked, className}) => {
 
     const [isliking, setIsLiking] = useState(false)
     const [liked, setLiked] = useState(isLiked)
@@ -69,12 +71,18 @@ const PostInteractions: React.FC<PostinteractionProps> = ({id, like, likeCount, 
                 toast.error('failed liking')
             }
         }
+
+        const {handleOpen, handleClose, isOpen} = useIsOpen(false)
     
         return (
-            <div className={cn(`flex items-center gap-4`, className )}>
-                {likesCount}<Heart className={cn(`cursor-pointer`, liked ? ' fill-pink-700 ' : "")} onClick={liked ? handleDislike : handleLike}/>
-                <MessageCircle/>
-                <RepeatIcon/>
+            <div className={cn(`flex flex-col`, className )}>
+                <div className="flex items-center gap-4">
+                    
+                    {likesCount}<Heart className={cn(`cursor-pointer`, liked ? ' fill-pink-700 ' : "")} onClick={liked ? handleDislike : handleLike}/>
+                    <MessageCircle onClick={ isOpen ? handleClose : handleOpen}/>
+                    <RepeatIcon/>
+                </div>
+                { isOpen && (<CommentInputArea handleCloseComment={handleClose} className="mt-[3rem] border-2 rounded-xl" postId={id} />)}
             </div>
         );
     }
