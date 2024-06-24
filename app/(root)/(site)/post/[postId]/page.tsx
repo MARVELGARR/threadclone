@@ -1,12 +1,10 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import PostCards from "@/components/myComponents/postCard"
 import PostComments from "@/components/myComponents/postComment"
-import PostComment from "@/components/myComponents/postComment"
 import { ExtendedUser } from "@/util/types"
-import { Reply } from "@prisma/client"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
-import { ExtendedPost } from '../../../../../util/types';
+
 
 
 
@@ -54,6 +52,7 @@ const specificPosst = async ({params}:{params: {postId: string}}) => {
                 story={posts.story}
                 tags={posts.tags}
                 user={posts.user as ExtendedUser}
+                postId={posts.id}
             />
 
 

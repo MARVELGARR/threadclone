@@ -44,7 +44,7 @@ const UsersThreads = async ({params}:{
             {posts.map((post)=>{
                 return (
                     <PostCards
-                        id={post.id}
+                        postId={post.id}
                         images={post.images}
                         story={post.story}
                         tags={post.tags}

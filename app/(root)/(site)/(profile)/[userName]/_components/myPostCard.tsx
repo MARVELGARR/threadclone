@@ -97,6 +97,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images,  tags, user}) => {
                     </div>
                 </div>
             )}
+
         </div>
     );
 }

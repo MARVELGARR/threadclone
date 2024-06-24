@@ -9,6 +9,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { X } from "lucide-react";
 
+
 type CommentInputProps = {
     id: number,
     value: string,
@@ -60,6 +61,7 @@ const CommentInputArea = ( {postId, className, handleCloseComment} : {postId: st
             if (response.ok) {
                 toast.success('Comment posted');
                 handleCloseComment()
+                
             } else {
                 const errorData = await response.json();
                 toast.error(`Failed to create comment: ${errorData.message || response.statusText}`);
