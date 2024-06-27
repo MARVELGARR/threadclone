@@ -1,4 +1,4 @@
-import { Followers, Like, Post, PrismaClient, Profile, User } from '@prisma/client';
+import { Followers, Like, Post, PrismaClient, Profile, Reply, User } from '@prisma/client';
 
 // Declare global Prisma client to avoid multiple instances
 declare global {
@@ -18,6 +18,7 @@ export interface ExtendedPost extends Post {
   [x: string]: any;
   user: ExtendedUser;
   like: Like[];
+  reply?: Reply[]
 }
 
 
@@ -33,6 +34,7 @@ export type PostCardProps = {
   profile?: ExtendedProfile
   like?: Like[]
   onClick?: React.MouseEventHandler<HTMLDivElement>;
+  reply?: Reply[]
 }
 
 export type commentCardProps={

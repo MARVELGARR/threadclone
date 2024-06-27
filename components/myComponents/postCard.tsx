@@ -14,7 +14,7 @@ import PostInteractions from "./postInteractions";
 import { useSession } from "next-auth/react";
 import { Separator } from "../ui/separator";
 
-const PostCards: React.FC<PostCardProps> = ({ story, images, follower, like, id, postId, tags, user, currentUser}) => {
+const PostCards: React.FC<PostCardProps> = ({ story, images, follower, reply, like, id, postId, tags, user, currentUser}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -40,9 +40,12 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, like, id,
 
     const PostUserProfileId = user.profile?.id;
 
+    const isMyPost = user.id === session?.user.id
+
     const likeCount = like?.filter((like) => like.status === 'liked')?.length
     const Liked = like?.find((item)=> item.userId === session?.user.id)
     const isLiked = Liked?.status === 'liked'
+    const replyCount = reply?.length
 
     const { isFollowing, followerCount, follow, unfollow } = useFollowStatus(currentUser?.profile?.id || null, PostUserProfileId || null);
 
@@ -74,7 +77,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, like, id,
                                     )}s
                                 </Link>
         
-                                <PostOption postId={id}/>
+                                { isMyPost &&(<PostOption  postId={postId}/>)}
                             </div>
                             <div className="mt-2 space-y-2">
                                 <div className="break-words max-w-[500px]">
@@ -129,7 +132,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, like, id,
                     
                 </Link>
                 <Separator className="mt-3"/>
-                <PostInteractions className=" w-full ml-[2rem] pt-2" isLiked={isLiked} likeCount={likeCount} id={postId}/>
+                <PostInteractions className=" w-full ml-[2rem] pt-2" replyCount={replyCount} isLiked={isLiked} likeCount={likeCount} id={postId}/>
             </div>
         );
     }

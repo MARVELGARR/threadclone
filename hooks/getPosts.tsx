@@ -15,7 +15,8 @@ export async function useGetAllPosts( userId?: string): Promise<ExtendedPost[]>{
                           },
                         }
                     }
-                }
+                },
+                reply: true
 
             }
         })

@@ -31,6 +31,7 @@ const HomePage = async () => {
                                 user={post.user}
                                 currentUser = {currentUser as ExtendedUser}
                                 postId={post.id}
+                                reply={post.reply}
                             />
                         )
                     })}

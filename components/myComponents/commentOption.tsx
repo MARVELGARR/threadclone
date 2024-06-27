@@ -11,32 +11,32 @@ import { Trash2Icon } from "lucide-react";
 import toast from "react-hot-toast";
   
 type PostOptionsProps = {
-    postId: string | undefined
+    commentId: string | undefined
 }
 
-const PostOption: React.FC<PostOptionsProps> = ({ postId }) => {
-
+const CommentOption: React.FC<PostOptionsProps> = ({ commentId }) => {
+    if (commentId) {
         
-        const handleDeletePost = async (postId: string | undefined) => {
+
+        const handleDeleteComment = async (commentId: string | undefined) => {
             try {
-                const response = await fetch(`http://localhost:3000/api/post/${postId}`, {
+                const response = await fetch(`http://localhost:3000/api/comment/single/${commentId}`, {
                     method: 'DELETE',
                     headers: {
                         "Content-Type": "application/json",
                     },
                 });
                 if (response.ok) {
-                    toast.success('Post deleted');
+                    toast.success('Comment deleted');
                 } else if (response.status === 404) {
                     toast.error('Post not found');
                 } else {
-                    toast.error('Failed to delete post');
+                    toast.error('Failed to delete Comment');
                 }
             } catch (error) {
-                toast.error('An error occurred while deleting the post');
+                toast.error('An error occurred while deleting the Comment');
             }
         }
-
         
         return (
             <DropdownMenu>
@@ -44,15 +44,15 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId }) => {
                 <DropdownMenuContent>
                     <DropdownMenuLabel>Post options</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={() => handleDeletePost(postId)}>Delete <Trash2Icon/></DropdownMenuItem>
+                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={() => handleDeleteComment(commentId)}>Delete <Trash2Icon/></DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         );
-    
+    }
     
 
 
 
 }
 
-export default PostOption;
+export default CommentOption;

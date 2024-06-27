@@ -53,6 +53,8 @@ const specificPosst = async ({params}:{params: {postId: string}}) => {
                 tags={posts.tags}
                 user={posts.user as ExtendedUser}
                 postId={posts.id}
+                reply={posts.reply}
+                
             />
 
 

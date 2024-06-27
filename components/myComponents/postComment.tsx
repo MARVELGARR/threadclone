@@ -5,6 +5,7 @@ import Link from "next/link";
 import { commentCardProps } from "@/util/types";
 import { useSession } from "next-auth/react";
 import PostOption from "./postOption";
+import CommentOption from "./commentOption";
 
 
 
@@ -35,7 +36,7 @@ const PostComments : React.FC<commentCardProps> = ({ like, story, user, commentI
                                 
                             </Link>
     
-                            <PostOption postId={commentId}/>
+                        <CommentOption commentId={commentId} />
                         </div>
                         <div className="mt-2 space-y-2">
                             <div className="break-words max-w-[500px]">

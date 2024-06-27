@@ -14,9 +14,10 @@ type PostinteractionProps = {
     like?: Like[]
     isLiked: boolean
     likeCount?: number
+    replyCount?: number
 }
 
-const PostInteractions: React.FC<PostinteractionProps> = ({id, likeCount, isLiked, className}) => {
+const PostInteractions: React.FC<PostinteractionProps> = ({id, replyCount, likeCount, isLiked, className}) => {
 
     const [isliking, setIsLiking] = useState(false)
     const [liked, setLiked] = useState(isLiked)
@@ -75,9 +76,14 @@ const PostInteractions: React.FC<PostinteractionProps> = ({id, likeCount, isLike
     return (
         <div className={cn(`flex flex-col`, className  )}>
             <div className="flex items-center gap-[5rem]">
-                
-                {likesCount}<Heart className={cn(`cursor-pointer`, liked ? ' fill-pink-700 ' : "")} onClick={liked ? handleDislike : handleLike}/>
-                <MessageCircle onClick={ isOpen ? handleClose : handleOpen}/>
+                <div className="flex items-center gap-2">
+
+                    {likesCount}<Heart className={cn(`cursor-pointer`, liked ? ' fill-pink-700 ' : "")} onClick={liked ? handleDislike : handleLike}/>
+                </div>
+                <div className="flex items-center gap-2">
+                    {replyCount}
+                    <MessageCircle className=" cursor-pointer" onClick={ isOpen ? handleClose : handleOpen}/>
+                </div>
                 <RepeatIcon/>
             </div>
             { isOpen && id && (<CommentInputArea handleCloseComment={handleClose} className="mt-[3rem] border-2 rounded-xl" postId={id} />)}

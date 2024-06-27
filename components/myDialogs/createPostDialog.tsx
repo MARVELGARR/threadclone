@@ -1,15 +1,29 @@
 'use client'
 
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
-import { FormControl, FormField, FormItem } from '../ui/form';
+import { Form, FormControl, FormField, FormItem } from '../ui/form';
 
 import InputPost from '../myComponents/inputPostContainer';
 import ThreadInputArea from '../myComponents/threadInputArea';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-
+const formSchema = z.object({
+    username: z.string().min(2, {
+      message: "Username must be at least 2 characters.",
+    }),
+})
 
 
 const CreatePostDialog = ({className}:{className?: string}) => {
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          username: "",
+        },
+    })
 
     return (
         <Dialog>
@@ -17,26 +31,24 @@ const CreatePostDialog = ({className}:{className?: string}) => {
                 <InputPost className='w-full text-left'/>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[725px] sm:max-h-[600px] overflow-y-auto">
-                <div className="">
+                <Form {...form}>
+                    <form  className="space-y-8">
+                        <FormField
+                        control={form.control}
+                        name="username"
+                        render={({ field }) => (
+                            <FormItem>
+                                <div className=""></div>
+                                <FormControl className='w-full'>
+                                    <ThreadInputArea/>
+                                </FormControl>
 
-                    <div>
-                        <div className="space-y-4">
-                            <FormField
-                                name="post"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <div className=""></div>
-                                        <FormControl className='w-full'>
-                                            <ThreadInputArea/>
-                                        </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    </form>
+                </Form>
 
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                    </div>
-
-                </div>
             </DialogContent>
         </Dialog>
 
