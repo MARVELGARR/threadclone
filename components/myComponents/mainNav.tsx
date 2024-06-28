@@ -29,12 +29,6 @@ const Main_nav = ({className}: {className?: string}) => {
             logo : <Edit className=" w-9 h-9 "/>
         },
         {
-            label: 'likes',
-            href: '/likes',
-            active: pathname === '/likes',
-            logo : <Heart className="w-9 h-9 "/>
-        },
-        {
             label: 'profile',
             href: `@${session.data?.user.name}` || "/proflie",
             active: pathname === `/@${session.data?.user.name}`,

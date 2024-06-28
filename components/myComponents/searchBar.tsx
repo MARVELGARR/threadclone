@@ -31,14 +31,14 @@ const SearchBar: React.FC<SearchBarProps> = ({className, data, currentUser}) => 
         setUserData(result);
 
 
-    }, [searchQuery]);
+    }, [data, searchQuery]);
 
 
 
     return (
         <div className="">
 
-            <Input className='sticky top-0' onChange={handleInputChange} value={searchQuery} className={cn('', className)} placeholder={`Search...`} />
+            <Input className='sticky top-0' onChange={handleInputChange} value={searchQuery}  placeholder={`Search...`} />
             <div className=" overflow-y-scroll">
 
                 <UsersDisplay data={userData as ExtendedUser[]} currentUser={currentUser as ExtendedUser}/>

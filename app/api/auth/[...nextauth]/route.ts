@@ -2,33 +2,32 @@ import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-
 import bcrypt from "bcrypt";
 import { prisma } from "@/prisma/prismaClient";
 import { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+
 declare module "next-auth" {
     interface Session {
-      user: {
-        id: string;
-        name: string;
-        email: string;
-        image?: string;
-      };
+        user: {
+            id: string;
+            name: string;
+            email: string;
+            image?: string;
+        };
     }
-  
+
     interface JWT {
-      id: string;
+        id: string;
     }
-  }
-  
+}
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma) as unknown as Adapter,
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE as string,
-            clientSecret: process.env.GOOGLE_SECRE as string,
+            clientSecret: process.env.GOOGLE_SECRET as string,
         }),
         GitHubProvider({
             clientId: process.env.GITHUB_ID as string,
@@ -72,8 +71,7 @@ export const authOptions: AuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            if(session.user){
-
+            if (session.user) {
                 session.user.id = token.id as string;
             }
             return session;
@@ -85,7 +83,3 @@ export const authOptions: AuthOptions = {
     },
     debug: process.env.NODE_ENV === "development",
 };
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };

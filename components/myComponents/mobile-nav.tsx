@@ -29,12 +29,7 @@ const MobileNav = ({className}:{
             active: pathname === '/edit',
             logo : <Edit className="w-9 h-9 "/>
         },
-        {
-            label: 'likes',
-            href: '/likes',
-            active: pathname === '/likes',
-            logo : <Heart className="w-9 h-9 "/>
-        },
+        
         {
             label: 'profile',
             href: '/profile',
