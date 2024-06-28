@@ -8,9 +8,10 @@ import UsersDisplay from "./userDisplay";
 type SearchBarProps = {
     className?: string;
     data: ExtendedUser[]
+    currentUser: ExtendedUser | null
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({className, data}) => {
+const SearchBar: React.FC<SearchBarProps> = ({className, data, currentUser}) => {
 
     const [searchQuery, setSearchQuery] = useState('')
     const [userData, setUserData] = useState<ExtendedUser[]>(data);
@@ -37,8 +38,11 @@ const SearchBar: React.FC<SearchBarProps> = ({className, data}) => {
     return (
         <div className="">
 
-            <Input onChange={handleInputChange} value={searchQuery} className={cn('', className)} placeholder={`Search...`} />
-            <UsersDisplay data={userData as ExtendedUser[]} />
+            <Input className='sticky top-0' onChange={handleInputChange} value={searchQuery} className={cn('', className)} placeholder={`Search...`} />
+            <div className=" overflow-y-scroll">
+
+                <UsersDisplay data={userData as ExtendedUser[]} currentUser={currentUser as ExtendedUser}/>
+            </div>
             
 
         </div>
