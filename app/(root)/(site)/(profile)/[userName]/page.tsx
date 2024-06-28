@@ -1,9 +1,10 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import PostCards from "./_components/myPostCard";
+import { authOptions } from "@/util/authOptions";
 
 const Threads = async () => {
 

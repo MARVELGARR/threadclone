@@ -1,9 +1,9 @@
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SearchBar from "@/components/myComponents/searchBar";
 import UsersDisplay from "@/components/myComponents/userDisplay";
 import useGetAllUsers from '@/hooks/getAllUsers';
 import getCurrentUser from "@/hooks/getCurrentUser";
+import { authOptions } from "@/util/authOptions";
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 // Ensure you import prisma properly

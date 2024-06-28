@@ -1,5 +1,6 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 import PostCards from "@/components/myComponents/postCard";
+import { authOptions } from "@/util/authOptions";
 
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
@@ -41,9 +42,10 @@ const UsersThreads = async ({params}:{
 
     return (
         <div className="flex flex-col gap-3 mt-2">
-            {posts.map((post)=>{
+            {posts.map((post, index)=>{
                 return (
                     <PostCards
+                        key={index}
                         postId={post.id}
                         images={post.images}
                         story={post.story}

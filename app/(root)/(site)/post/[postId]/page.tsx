@@ -1,6 +1,7 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+
 import PostCards from "@/components/myComponents/postCard"
 import PostComments from "@/components/myComponents/postComment"
+import { authOptions } from "@/util/authOptions"
 import { ExtendedUser } from "@/util/types"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"

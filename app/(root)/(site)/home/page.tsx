@@ -1,9 +1,10 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 import CreatePost from "@/components/myComponents/createPost";
 import ForYouButton from "@/components/myComponents/forYouButton";
 import PostCard from "@/components/myComponents/postCard";
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { useGetAllPosts } from "@/hooks/getPosts";
+import { authOptions } from "@/util/authOptions";
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 
