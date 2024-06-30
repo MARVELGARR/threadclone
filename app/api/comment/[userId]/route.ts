@@ -33,6 +33,8 @@ export async function POST(req: Request, {params}:{params: { userId: string}}){
 export async function DELETE(req: Request, {params}:{params: { userId: string}}){
 
     const content = await req.json();
+    const { postId, filteredComment } = content
+    const stories = filteredComment.map((item: { value: string }) => item.value).join('\n');
 
     try{
 
