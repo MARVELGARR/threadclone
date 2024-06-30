@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
 import { commentCardProps } from "@/util/types";
 import { useSession } from "next-auth/react";
-import PostOption from "./postOption";
 import CommentOption from "./commentOption";
 
 

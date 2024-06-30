@@ -2,13 +2,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useSession } from "next-auth/react";
 import { Input } from "../ui/input";
-import { Image, Hash, X } from "lucide-react";
+import {  Hash, Images, X } from "lucide-react";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 type ThreadsInputProps = {
     id: number,
@@ -148,7 +148,7 @@ const ThreadInputArea = () => {
                         <div className="flex flex-wrap gap-2 mt-2 pl-16">
                             {thread.images.map((image, imageIndex) => (
                                 <div key={imageIndex} className="relative">
-                                    <img src={image} alt="thread image" className="w-24 h-24 object-cover rounded" />
+                                    <Image src={image} alt="thread image" className="w-24 h-24 object-cover rounded" />
                                     <X className="absolute top-1 right-1 cursor-pointer" onClick={() => handleRemoveImage(thread.id, imageIndex)} />
                                 </div>
                             ))}
@@ -185,7 +185,7 @@ const ThreadInputArea = () => {
                             </div>
                         )}
                         <div className="flex items-center w-full justify-start mt-2 pl-16 gap-5">
-                            <Image className="stroke-gray-400 cursor-pointer" onClick={() => handleImageOpen(thread.id)} />
+                            <Images className="stroke-gray-400 cursor-pointer" onClick={() => handleImageOpen(thread.id)} />
                             <Hash onClick={() => handleTagOpen(thread.id)} className="stroke-gray-400 cursor-pointer" />
                         </div>
                     </div>

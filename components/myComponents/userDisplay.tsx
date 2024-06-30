@@ -1,12 +1,9 @@
 'use client'
 import { ExtendedUser } from "@/util/types";
-import Image from "next/image";
-import { Followers } from '@prisma/client';
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
-import useFollowStatus from "@/hooks/useFollowStatus";
 import toast from "react-hot-toast";
 
 

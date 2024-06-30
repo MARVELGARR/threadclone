@@ -28,13 +28,13 @@ export default function useFollowStatus(followerId: string | null, followingId: 
         } catch (error) {
             toast.error("Failed to check follow status");
         }
-    }, [followerId, followingId, followerCount]);
+    }, [followerId, followingId]);
 
     useEffect(() => {
         if (followerId && followingId) {
             checkFollowStatus();
         }
-    }, [followerId, followingId]);
+    }, [checkFollowStatus, followerId, followingId]);
 
     const follow = useCallback(async () => {
         try {

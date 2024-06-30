@@ -1,6 +1,5 @@
 
 import SearchBar from "@/components/myComponents/searchBar";
-import UsersDisplay from "@/components/myComponents/userDisplay";
 import useGetAllUsers from '@/hooks/getAllUsers';
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { authOptions } from "@/util/authOptions";
@@ -15,6 +14,7 @@ const SearchPage = async() => {
         return 'not authenticated'
     }
 
+   // eslint-disable-next-line react-hooks/rules-of-hooks
    const users = await useGetAllUsers()
     const currentUser = await getCurrentUser(session?.user.id)
 

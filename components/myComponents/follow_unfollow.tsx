@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import useFollowStatus from '@/hooks/useFollowStatus';
 import { Button } from '../ui/button';
 
 interface FollowStatusProps {

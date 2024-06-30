@@ -19,7 +19,7 @@ interface ProfilePageProps {
     children: React.ReactNode;
 }
 
-export default function({ params, children }: ProfilePageProps){
+export default function UserLayout({ params, children }: ProfilePageProps){
     const {data: session} = useSession();
     const [currentUser, setCurrentUser] = useState<ExtendedUser | null>(null)
     const [user, setUser] = useState<ExtendedUser | null>(null)
@@ -44,7 +44,7 @@ export default function({ params, children }: ProfilePageProps){
         fetchPostUser(params.userId)
         console.log(currentUser)
         
-    },[])
+    },[currentUser, params.userId, session.user.id])
 
 
 

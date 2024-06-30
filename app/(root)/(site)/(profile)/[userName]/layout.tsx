@@ -1,10 +1,10 @@
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
 import Bio from "./_components/bio";
 import ReplyRepost from "@/components/myComponents/reply_repost";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/util/authOptions";
 
 
 

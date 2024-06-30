@@ -1,7 +1,6 @@
 const Replies = () => {
     return (
         <>
-            sjsjdsdjdsj
         </>
     );
 }
