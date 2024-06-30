@@ -63,7 +63,7 @@ export type profileCardProps = {
 }
 
 export type updateProfileProps ={
-  className: string,
+  className?: string,
   id: string,
   name: string,
   links: string,

@@ -47,7 +47,7 @@ const Bio = ({data}: {
                 </Link>
             </div>
             
-            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || " "} link={data?.profile?.links|| ""} bio={data?.profile?.bio || ""} className="w-full font-extrabold"/>
+            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || " "} links={data?.profile?.links|| ""} bio={data?.profile?.bio || ""} className="w-full font-extrabold"/>
         </div>
     );
 }
