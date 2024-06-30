@@ -11,7 +11,7 @@ export async function POST(req: Request, {params}:{params: { userId: string}}){
 
         const newComment = await prisma?.reply.create({
             data:{
-                postId,
+                postId:postId,
                 story:stories.split('\n'),
                 userId: params.userId         
             }
