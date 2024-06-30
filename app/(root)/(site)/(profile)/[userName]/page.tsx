@@ -34,9 +34,10 @@ const Threads = async () => {
 
     return (
         <div className="flex flex-col gap-3 mt-2">
-            {posts.map((post)=>{
+            {posts.map((post, index)=>{
                 return (
                     <PostCards
+                        key={index}
                         images={post.images}
                         story={post.story}
                         tags={post.tags}

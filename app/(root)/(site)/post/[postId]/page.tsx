@@ -60,9 +60,10 @@ const specificPosst = async ({params}:{params: {postId: string}}) => {
 
 
             {
-                comments?.map((comment)=>{
+                comments?.map((comment, index)=>{
                     return(
                         <PostComments
+                            key={index}
                             className="w-[40rem]"
                             story={comment.story}
                             commentId={comment.id}
