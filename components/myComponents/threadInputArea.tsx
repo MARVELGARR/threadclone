@@ -163,14 +163,13 @@ const ThreadInputArea = () => {
                         </div>
                         {imageOpen === thread.id && (
                             <div className="mt-2 pl-16 w-full">
-                                <UploadButton<OurFileRouter>
+                                <UploadButton<OurFileRouter, "imageUploader">
                                     endpoint="imageUploader"
-                                    onUploadComplete={(files) => {
-                                        files.forEach((file) => handleAddImage(thread.id, file.url));
-                                    }}
+                                   
                                     onClientUploadComplete={(files) => {
                                         files.forEach((file) => handleAddImage(thread.id, file.url));
                                     }}
+
                                 />
                             </div>
                         )}
