@@ -2,8 +2,6 @@
 
 import UpdateProfileDialog from "@/components/myDialogs/updateProfile";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import useIsOpen from "@/hooks/useOpen";
 import { ExtendedUser } from "@/util/types";
 import { Instagram } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -17,7 +15,7 @@ const Bio = ({data}: {
     data: ExtendedUser | null
 }) => {
     const session = useSession()
-    const {isOpen, handleOpen} = useIsOpen(false)
+
     return (
         <div className=" text-wrap flex flex-col gap-4">
             <div className="flex items-center justify-between ">
@@ -36,7 +34,7 @@ const Bio = ({data}: {
                 <div className="flex items-center gap-5">
                     <div className="flex items-center gap-2">
                         <div className=""></div>
-                        <div className="">{data?.profile?.followers?.length || 0}</div>
+                        <div className="">{data?.profile?.follower?.length || 0}</div>
                         <div className="">Followers</div>
                     </div>
                     <Link className=' italic text-gray-500 ' href={data?.profile?.links || 'www.instagram.com'}>{data?.profile?.links}</Link>
