@@ -33,7 +33,7 @@ const PostInteractions: React.FC<PostinteractionProps> = ({id, replyCount, likeC
     const {handleOpen, handleClose, isOpen} = useIsOpen(false)
     const handleLike = async () =>{
         setIsLiking(true)
-        const liking = await fetch('http://localhost:3000/api/like',{
+        const liking = await fetch('/api/like',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const PostInteractions: React.FC<PostinteractionProps> = ({id, replyCount, likeC
     
     const handleDislike = async () =>{
         setIsLiking(true)
-        const liking = await fetch('http://localhost:3000/api/like',{
+        const liking = await fetch('/api/like',{
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
