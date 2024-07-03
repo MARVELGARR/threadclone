@@ -95,7 +95,7 @@ const ThreadInputArea = () => {
     const handleSend = async (filteredThreads: ThreadsInputProps[]) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/api/${session?.user.id}`, {
+            const response = await fetch(`/api/${session?.user.id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
