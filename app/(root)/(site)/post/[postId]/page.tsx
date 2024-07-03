@@ -9,13 +9,14 @@ import { redirect } from "next/navigation"
 
 
 
+
 const specificPosst = async ({params}:{params: {postId: string}}) => {
     const session = await getServerSession(authOptions)
     if(!session){
         redirect("/login")
     }
 
-    const posts = await prisma?.post.findUnique({
+    const posts = await prisma!.post.findUnique({
         where:{
             id: params.postId
         },
