@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import PostCards from "./_components/myPostCard";
 import { authOptions } from "@/util/authOptions";
+import { prisma } from '../../../../../prisma/prismaClient';
 
 const Threads = async () => {
 
@@ -13,7 +14,7 @@ const Threads = async () => {
         redirect("/login")
     }
 
-    const posts = await prisma?.post.findMany({
+    const posts = await prisma.post.findMany({
         where:{
             userId: session.user.id
         },

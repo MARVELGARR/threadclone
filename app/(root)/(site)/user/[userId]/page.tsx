@@ -5,6 +5,7 @@ import { authOptions } from "@/util/authOptions";
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { prisma } from '../../../../../prisma/prismaClient';
 
 
 
@@ -19,7 +20,7 @@ const UsersThreads = async ({params}:{
         redirect("/login")
     }
 
-    const posts = await prisma?.post.findMany({
+    const posts = await prisma.post.findMany({
         where:{
             userId: params.userId
         },

@@ -5,6 +5,7 @@ import { authOptions } from "@/util/authOptions"
 import { ExtendedUser } from "@/util/types"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
+import { prisma } from '../../../../../prisma/prismaClient';
 
 
 
@@ -16,7 +17,7 @@ const specificPosst = async ({params}:{params: {postId: string}}) => {
         redirect("/login")
     }
 
-    const posts = await prisma!.post.findUnique({
+    const posts = await prisma.post.findUnique({
         where:{
             id: params.postId
         },

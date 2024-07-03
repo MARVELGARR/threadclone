@@ -26,7 +26,6 @@ const PostCards: React.FC<PostCardProps> = ({ story, images,  tags, user}) => {
 
     const isThread = story.length > 1;
 
-    const PostUserProfileId = user.profile?.id;
 
 
 
