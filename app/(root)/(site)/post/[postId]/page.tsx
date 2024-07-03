@@ -41,7 +41,7 @@ const specificPosst = async ({params}:{params: {postId: string}}) => {
     const comments = posts?.reply
 
     if(!posts){
-        return
+        return <>jswjsw</>
     }
 
     return (
