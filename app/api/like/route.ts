@@ -14,7 +14,7 @@ export async function POST(req: Request) {
             }
         });
 
-        if (!findPostLike || findPostLike.length === 0) {
+        if (findPostLike.length === 0) {
             const newPostLike = await prisma.like.create({
                 data: {
                     postId,
