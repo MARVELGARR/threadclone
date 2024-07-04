@@ -13,8 +13,7 @@ export async function POST(req: Request) {
                 userId,
             }
         });
-
-        if (!findPostLike || findPostLike.length == 0) {
+        if (!findPostLike || findPostLike.length < 1) {
             const newPostLike = await prisma.like.create({
                 data: {
                     postId,
