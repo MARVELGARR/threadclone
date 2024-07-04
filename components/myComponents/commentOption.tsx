@@ -20,7 +20,7 @@ const CommentOption: React.FC<PostOptionsProps> = ({ commentId }) => {
 
         const handleDeleteComment = async (commentId: string | undefined) => {
             try {
-                const response = await fetch(`http://localhost:3000/api/comment/single/${commentId}`, {
+                const response = await fetch(`/api/comment/single/${commentId}`, {
                     method: 'DELETE',
                     headers: {
                         "Content-Type": "application/json",
