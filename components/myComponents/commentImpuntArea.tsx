@@ -50,7 +50,7 @@ const CommentInputArea = ( {postId, className, handleCloseComment} : {postId: st
     const handleSend = async (filteredComment: CommentInputProps[]) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/api/comment/${session?.user.id}`, {
+            const response = await fetch(`api/comment/${session?.user.id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
