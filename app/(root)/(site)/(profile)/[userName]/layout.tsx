@@ -1,7 +1,7 @@
 
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
-import Bio from "./_components/bio";
+import Bio from "./components/bio";
 import ReplyRepost from "@/components/myComponents/reply_repost";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/util/authOptions";
