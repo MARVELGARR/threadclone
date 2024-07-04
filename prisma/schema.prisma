@@ -114,12 +114,13 @@ model Thread {
 
 model Like{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  postId String? @db.ObjectId @unique
+  postId String? @db.ObjectId 
   post Post? @relation(fields: [postId], references: [id])
-  replyId String? @db.ObjectId @unique
+  replyId String? @db.ObjectId 
   reply Reply? @relation(fields: [replyId], references: [id])
   userId        String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id])
   status String?
+  @@unique([postId, replyId, userId])
 
 }
