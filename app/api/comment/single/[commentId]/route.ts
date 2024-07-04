@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import  {prisma}  from "@/prisma/prismaClient";
 
 export async function DELETE(req: Request, {params}:{params: { commentId: string}}){
 
     try{
 
-        const newComment = await prisma?.reply.deleteMany({
+        const newComment = await prisma.reply.deleteMany({
             where:{
                 id: params.commentId,     
             }

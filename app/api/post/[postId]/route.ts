@@ -3,7 +3,7 @@ import  {prisma}  from "@/prisma/prismaClient";
 
 export async function DELETE(req: Request, { params }: { params: { postId: string } }) {
     try {
-        const deletePost = await prisma?.post.deleteMany({
+        const deletePost = await prisma.post.deleteMany({
             where: {
                 id: params.postId
             }

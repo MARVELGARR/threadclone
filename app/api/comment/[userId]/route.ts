@@ -1,6 +1,6 @@
 
 import { NextResponse } from "next/server";
-
+import  {prisma}  from "@/prisma/prismaClient";
 
 export async function POST(req: Request, {params}:{params: { userId: string}}){
 
@@ -9,7 +9,7 @@ export async function POST(req: Request, {params}:{params: { userId: string}}){
     const stories = filteredComment.map((item: { value: string }) => item.value).join('\n');
     try{
 
-        const newComment = await prisma?.reply.create({
+        const newComment = await prisma.reply.create({
             data:{
                 postId:postId,
                 story:stories.split('\n'),
@@ -38,7 +38,7 @@ export async function DELETE(req: Request, {params}:{params: { userId: string}})
 
     try{
 
-        const newComment = await prisma?.reply.create({
+        const newComment = await prisma.reply.create({
             data:{
                 postId,
                 story:stories.split('\n'),

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+import  {prisma}  from "@/prisma/prismaClient";
 
 
 export async function POST(req : Request) {
@@ -7,7 +7,7 @@ export async function POST(req : Request) {
   const { followingId, followerId } = content;
 
   try {
-    const checking = await prisma?.followers.findMany({
+    const checking = await prisma.followers.findMany({
       where: {
         followerId,
         followingId,
@@ -62,7 +62,7 @@ export async function PATCH(req: Request) {
   const { followingId, followerId } = content;
 
   try {
-    const checking = await prisma?.followers.findMany({
+    const checking = await prisma.followers.findMany({
       where: {
         followerId,
         followingId,
@@ -71,7 +71,7 @@ export async function PATCH(req: Request) {
     });
 
     if (checking) {
-      const unfollow = await prisma?.followers.updateMany({
+      const unfollow = await prisma.followers.updateMany({
         where: {
           followerId,
           followingId,

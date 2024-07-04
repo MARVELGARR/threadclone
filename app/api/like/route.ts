@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
+import  {prisma}  from "@/prisma/prismaClient";
+
 
 export async function POST(req: Request) {
     const content = await req.json();
     const { postId, userId } = content;
 
     try {
-        const findPostLike = await prisma?.like.findMany({
+        const findPostLike = await prisma.like.findMany({
             where: {
                 postId,
                 userId,
@@ -13,7 +15,7 @@ export async function POST(req: Request) {
         });
 
         if (!findPostLike || findPostLike.length === 0) {
-            const newPostLike = await prisma?.like.create({
+            const newPostLike = await prisma.like.create({
                 data: {
                     postId,
                     userId,
@@ -30,7 +32,7 @@ export async function POST(req: Request) {
             if (statusRecord) {
                 return NextResponse.json({ message: 'Already liked' });
             } else {
-                const updatePostLike = await prisma?.like.updateMany({
+                const updatePostLike = await prisma.like.updateMany({
                     where: {
                         postId,
                         userId,
@@ -56,7 +58,7 @@ export async function PATCH(req: Request){
     const {postId, userId} = content
 
     try{
-        const newPostLike = await prisma?.like.findMany({
+        const newPostLike = await prisma.like.findMany({
             where:{
                 postId,
                 userId,
@@ -64,7 +66,7 @@ export async function PATCH(req: Request){
         })
         const thePost = newPostLike?.find((post)=>post.status === 'liked')
         if(thePost && thePost.status === 'liked'){
-            const updatePostLike = await prisma?.like.update({
+            const updatePostLike = await prisma.like.update({
                 where:{
                     postId,
                     userId,

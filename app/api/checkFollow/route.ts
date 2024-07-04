@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import  {prisma}  from "@/prisma/prismaClient";
 
 export async function POST( req: Request){
 
@@ -7,7 +8,7 @@ export async function POST( req: Request){
     const { followingId, followerId} = content;
 
     try{
-        const follow = await prisma?.followers.findUnique({
+        const follow = await prisma.followers.findUnique({
             where: {
                 followerId_followingId: {
                     followerId,
