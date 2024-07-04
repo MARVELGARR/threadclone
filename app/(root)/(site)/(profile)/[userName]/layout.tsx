@@ -20,7 +20,14 @@ export default async function ProfilePage({params, children}:{
         redirect('/login')
     }
     const currentUser = await wait()
-    if(!currentUser && !params.userName){
+    if(!currentUser){
+        return (
+            <div className="">
+                ...Loading
+            </div>
+        )
+    }
+    if(!params.userName){
         return (
             <div className="">
                 ...Loading
