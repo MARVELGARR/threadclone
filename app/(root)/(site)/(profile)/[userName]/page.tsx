@@ -3,7 +3,7 @@
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import PostCards from "./components/myPostCard";
+import PostCards from "./_components/myPostCard";
 import { authOptions } from "@/util/authOptions";
 import { prisma } from '../../../../../prisma/prismaClient';
 
@@ -30,7 +30,9 @@ const Threads = async () => {
     })
 
     if(!posts){
-        return
+       return (
+        <div className="">Loading..</div>
+       )
     }
 
     return (
