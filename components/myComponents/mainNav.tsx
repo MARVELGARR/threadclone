@@ -30,8 +30,8 @@ const Main_nav = ({className}: {className?: string}) => {
         },
         {
             label: 'profile',
-            href: "/proflie",
-            active: pathname === `/${session?.user?.name}`,
+            href: `/${session?.user.name}`,
+            active: pathname === `session?.user.name`,
             logo : <User className="w-9 h-9  stroke-slate-300 "/>
         },
     ]
