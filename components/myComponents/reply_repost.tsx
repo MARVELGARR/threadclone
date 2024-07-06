@@ -9,7 +9,7 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
     useEffect(()=>{
         console.log(userName)
     },[userName])
-    
+
     if (!userName) {
         return <>Loading..</>;
     }
@@ -19,11 +19,7 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
     const encodedUserName = encodeURIComponent(userName);
 
     const routes = [
-        {
-            href: `/${encodedUserName}`,
-            name: "Threads",
-            active: pathName === `/${encodedUserName}`
-        },
+        
         {
             href: `/${encodedUserName}/replies`,
             name: "Replies",
