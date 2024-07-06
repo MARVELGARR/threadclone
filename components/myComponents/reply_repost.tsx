@@ -6,6 +6,9 @@ import { usePathname } from "next/navigation";
 const ReplyRepost = ({userName}:{userName: string}) => {
 
     const pathName = usePathname()
+    if(!userName){
+        return <>Loading..</>
+    }
 
     const routes = [
         {

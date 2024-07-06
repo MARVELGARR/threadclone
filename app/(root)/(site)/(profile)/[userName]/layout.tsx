@@ -34,17 +34,20 @@ export default async function ProfilePage({params, children}:{
             </div>
         )
     }
+    else{
+
+        return (
+            <>
+                <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
+                <div className="flex flex-col flex-wrap z-99999">
+                    <Bio data={currentUser}/>
+                    <ReplyRepost userName={params.userName}/>
+                        {children}
+                </div>
+            </>
+        );
+    }
     
-    return (
-        <>
-            <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
-            <div className="flex flex-col flex-wrap z-99999">
-                <Bio data={currentUser}/>
-                <ReplyRepost userName={params.userName}/>
-                    {children}
-            </div>
-        </>
-    );
 }
 
 export async function wait(){
