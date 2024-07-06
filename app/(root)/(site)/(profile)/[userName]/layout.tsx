@@ -27,13 +27,6 @@ export default async function ProfilePage({params, children}:{
             </div>
         )
     }
-    if(!params.userName){
-        return (
-            <div className="">
-                ...Loading
-            </div>
-        )
-    }
     else{
 
         return (
@@ -41,7 +34,7 @@ export default async function ProfilePage({params, children}:{
                 <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
                 <div className="flex flex-col flex-wrap z-99999">
                     <Bio data={currentUser}/>
-                    <ReplyRepost userName={params.userName}/>
+                    <ReplyRepost userName={session.user.name}/>
                         {children}
                 </div>
             </>
