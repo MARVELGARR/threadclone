@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "next/navigation";
+
 
 const Replies = () => {
 
