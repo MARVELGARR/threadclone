@@ -1,15 +1,14 @@
 'use client';
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const ReplyRepost = ({ userName }: { userName: string }) => {
     const pathName = usePathname();
-    useEffect(()=>{
-        console.log(userName)
-    },[userName])
-
+    const {data: session} = useSession()
+    
     if (!userName) {
         return <>Loading..</>;
     }
@@ -19,16 +18,20 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
     const encodedUserName = encodeURIComponent(userName);
 
     const routes = [
-        
         {
-            href: `/${encodedUserName}/replies`,
-            name: "Replies",
-            active: pathName === `/${encodedUserName}/replies`
+            href: `/${session?.user.name}`,
+            name: "Threads",
+            active: pathName === `/${session?.user.name}`
         },
         {
-            href: `/${encodedUserName}/reposts`,
+            href: `/${session?.user.name}/replies`,
+            name: "Replies",
+            active: pathName === `/${session?.user.name}/replies`
+        },
+        {
+            href: `/${session?.user.name}/reposts`,
             name: "Reposts",
-            active: pathName === `/${encodedUserName}/reposts`
+            active: pathName === `/${session?.user.name}/reposts`
         },
     ];
 

@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 const Main_nav = ({className}: {className?: string}) => {
 
     const pathname = usePathname()
-    const session = useSession() 
+    const {data:session} = useSession() 
     const routes = [
         {
             label: 'Home',
@@ -30,8 +30,8 @@ const Main_nav = ({className}: {className?: string}) => {
         },
         {
             label: 'profile',
-            href: `/${session.data?.user.name}` || "/proflie",
-            active: pathname === `/${session.data?.user.name}`,
+            href: "/proflie",
+            active: pathname === `/${session?.user?.name}`,
             logo : <User className="w-9 h-9  stroke-slate-300 "/>
         },
     ]
