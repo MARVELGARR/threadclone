@@ -1,4 +1,3 @@
-
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
 import Bio from "./_components/bio";
@@ -6,56 +5,47 @@ import ReplyRepost from "@/components/myComponents/reply_repost";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/util/authOptions";
 
-
-
-
-export default async function ProfilePage({params, children}:{
-    params:{
+export default async function ProfilePage({ params, children }: {
+    params: {
         userName: string
-    }, 
+    },
     children: React.ReactNode
-}){
-    const session = await getServerSession(authOptions)
-    if(!session){
-        redirect('/login')
+}) {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        redirect('/login');
+        return null; // Ensures the function doesn't continue after redirect
     }
-    const currentUser = await wait()
-    if(!currentUser){
-        return (
-            <div className="">
-                ...Loading
-            </div>
-        )
-    }
-    if(!params.userName){
-        return (
-            <div className="">
-                ...Loading
-            </div>
-        )
-    }
-    else{
 
+    const currentUser = await fetchCurrentUser(session.user.id);
+    if (!currentUser) {
         return (
-            <>
-                <title>{`${currentUser?.name}(@${params.userName.replaceAll('%40', "").replaceAll('%20', "")} on Threads)`}</title>
-                <div className="flex flex-col flex-wrap z-99999">
-                    <Bio data={currentUser}/>
-                    <ReplyRepost userName={params.userName}/>
-                        {children}
-                </div>
-            </>
+            <div className="">
+                ...Loading
+            </div>
         );
     }
-    
+
+    const sanitizedUserName = params.userName.replace(/%40/g, "").replace(/%20/g, "");
+
+    return (
+        <>
+            <title>{`${currentUser?.name} (@${sanitizedUserName} on Threads)`}</title>
+            <div className="flex flex-col flex-wrap z-99999">
+                <Bio data={currentUser} />
+                <ReplyRepost userName={params.userName} />
+                {children}
+            </div>
+        </>
+    );
 }
 
-export async function wait(){
-    const session = await getServerSession(authOptions)
-    if(!session){
-        return console.error("User not authenticated")
+async function fetchCurrentUser(userId: string) {
+    try {
+        const currentUser = await getCurrentUser(userId);
+        return currentUser;
+    } catch (error) {
+        console.error("Failed to fetch current user:", error);
+        return null;
     }
-    const currentUser = await getCurrentUser(session?.user.id)
-    
-    return currentUser
 }
