@@ -10,9 +10,11 @@ const MobileNav = ({className}:{
 }) => {
 
     const {data: session} = useSession()
-    const pathname = usePathname()
-    if(!session || session?.user== null){
-        return
+    const pathname = usePathname();
+
+
+    if (!session || session == null) {
+        return "No session";
     }
 
     const encodedUserName = session.user.name.trim().replace(/ /g, "");
@@ -22,28 +24,27 @@ const MobileNav = ({className}:{
             label: 'Home',
             href: '/home',
             active: pathname === '/home',
-            logo : <HomeIcon className="w-9 h-9 "/>
+            logo: <HomeIcon className="w-9 h-9" />
         },
         {
-            label: 'search',
+            label: 'Search',
             href: '/search',
             active: pathname === '/search',
-            logo : <SearchIcon className="w-9 h-9 "/>
+            logo: <SearchIcon className="w-9 h-9" />
         },
         {
-            label: 'edit',
+            label: 'Edit',
             href: '/edit',
             active: pathname === '/edit',
-            logo : <Edit className="w-9 h-9 "/>
+            logo: <Edit className="w-9 h-9" />
         },
-        
         {
-            label: 'profile',
-            href: `/${encodedUserName}`,
-            active: pathname === encodedUserName,
-            logo : <User className="w-9 h-9 "/>
+            label: 'Profile',
+            href: encodedUserName ? `/${encodedUserName}` : "/profile",
+            active: pathname === `/${encodedUserName}`,
+            logo: <User className="w-9 h-9 stroke-slate-300" />
         },
-    ]
+    ];
 
     return (
         <nav className={cn("flex w-full items-center justify-between  h-fit absolute bottom-0", className)}>
