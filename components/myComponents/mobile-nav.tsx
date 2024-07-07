@@ -1,6 +1,7 @@
 "use client"
 import { cn } from "@/lib/utils";
 import { Edit, Heart, HomeIcon, SearchIcon, User } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,7 +9,13 @@ const MobileNav = ({className}:{
     className?: string
 }) => {
 
+    const {data: session} = useSession()
     const pathname = usePathname()
+    if(!session || session?.user== null){
+        return
+    }
+
+    const encodedUserName = session.user.name.replace(/ /g, "_");
 
     const routes = [
         {
@@ -32,8 +39,8 @@ const MobileNav = ({className}:{
         
         {
             label: 'profile',
-            href: '/profile',
-            active: pathname === '/profile',
+            href: `/@${encodedUserName}`,
+            active: pathname === `/@${encodedUserName}`,
             logo : <User className="w-9 h-9 "/>
         },
     ]

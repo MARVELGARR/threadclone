@@ -1,7 +1,7 @@
 'use client'
 import { Edit, Heart, HomeIcon, SearchIcon, User } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname} from "next/navigation";
 import { cn } from '@/lib/utils';
 import { useSession } from "next-auth/react";
 
@@ -13,7 +13,8 @@ const Main_nav = ({className}: {className?: string}) => {
         return "no session"
     }
     
-    const encodedUserName = encodeURIComponent(session.data.user.name)
+    const encodedUserName = session.data.user.name.replace(/ /g, "_");
+
     
     const routes = [
         {
