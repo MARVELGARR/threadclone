@@ -1,14 +1,19 @@
 'use client'
 import { Edit, Heart, HomeIcon, SearchIcon, User } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from '@/lib/utils';
 import { useSession } from "next-auth/react";
 
 const Main_nav = ({className}: {className?: string}) => {
 
     const pathname = usePathname()
-    const {data:session} = useSession() 
+    const session = useSession() 
+    if(!session || session.data == null){
+        return "no session"
+    }
+    
+    const encodedUserName = encodeURIComponent(session.data.user.name)
     const routes = [
         {
             label: 'Home',
@@ -30,8 +35,8 @@ const Main_nav = ({className}: {className?: string}) => {
         },
         {
             label: 'profile',
-            href: `/${session?.user.name}`,
-            active: pathname === `session?.user.name`,
+            href: `@${session.data?.user.name}` || "/proflie",
+            active: pathname === `/@${encodedUserName}`,
             logo : <User className="w-9 h-9  stroke-slate-300 "/>
         },
     ]
