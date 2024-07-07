@@ -14,6 +14,7 @@ const Main_nav = ({className}: {className?: string}) => {
     }
     
     const encodedUserName = session.data.user.name.replace(/ /g, "_");
+    
 
     
     const routes = [
