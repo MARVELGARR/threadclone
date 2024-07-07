@@ -15,7 +15,7 @@ const MobileNav = ({className}:{
         return
     }
 
-    const encodedUserName = session.user.name.replace(/ /g, "").trim();
+    const encodedUserName = encodeURIComponent(`/@${session.user.name.trim().replace(/ /g, "")}`);
 
     const routes = [
         {
@@ -39,8 +39,8 @@ const MobileNav = ({className}:{
         
         {
             label: 'profile',
-            href: `/@${encodedUserName}`,
-            active: pathname === `/@${encodedUserName}`,
+            href: encodedUserName,
+            active: pathname === encodedUserName,
             logo : <User className="w-9 h-9 "/>
         },
     ]

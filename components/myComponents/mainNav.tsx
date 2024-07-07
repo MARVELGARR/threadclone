@@ -13,7 +13,7 @@ const Main_nav = ({className}: {className?: string}) => {
         return "no session"
     }
     
-    const encodedUserName = session.data.user.name.replace(/ /g, "").trim();
+    const encodedUserName = encodeURIComponent(`/@${session.data.user.name.trim().replace(/ /g, "")}`);
     
 
     
@@ -38,8 +38,8 @@ const Main_nav = ({className}: {className?: string}) => {
         },
         {
             label: 'profile',
-            href: `/@${encodedUserName}` || "/proflie",
-            active: pathname === `/@${encodedUserName}`,
+            href: encodedUserName || "/proflie",
+            active: pathname === encodedUserName,
             logo : <User className="w-9 h-9  stroke-slate-300 "/>
         },
     ]
