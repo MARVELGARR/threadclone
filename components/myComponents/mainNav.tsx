@@ -13,7 +13,7 @@ const Main_nav = ({className}: {className?: string}) => {
         return "no session"
     }
     
-    const encodedUserName = encodeURIComponent(`@${session.data.user.name.trim().replace(/ /g, "")}`);
+    const encodedUserName = session.data.user.name.trim().replace(/ /g, "");
     
 
     
