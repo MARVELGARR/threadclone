@@ -27,7 +27,7 @@ export default async function ProfilePage({params, children}:{
             </div>
         )
     }
-    if(!params.userName){
+    if(params.userName){
         return (
             <div className="">
                 ...Loading

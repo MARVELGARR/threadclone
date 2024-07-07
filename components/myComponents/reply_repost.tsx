@@ -2,12 +2,13 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const ReplyRepost = ({ userName }: { userName: string }) => {
     const pathName = usePathname();
-    if (!userName) {
-        return <>Loading..</>;
-    }
+    useEffect(()=>{
+        console.log(userName)
+    },[userName])
 
     // URL encode userName to handle any special characters
 
