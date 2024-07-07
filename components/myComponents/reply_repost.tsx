@@ -10,23 +10,22 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
     }
 
     // URL encode userName to handle any special characters
-    const encodedUserName = encodeURIComponent(userName);
 
     const routes = [
         {
-            href: `/${encodedUserName}`,
+            href: `/${userName}`,
             name: "Threads",
-            active: pathName === `/${encodedUserName}`
+            active: pathName === `/${userName}`
         },
         {
-            href: `/${encodedUserName}/replies`,
+            href: `/${userName}/replies`,
             name: "Replies",
-            active: pathName === `/${encodedUserName}/replies`
+            active: pathName === `/${userName}/replies`
         },
         {
-            href: `/${encodedUserName}/reposts`,
+            href: `/${userName}/reposts`,
             name: "Reposts",
-            active: pathName === `/${encodedUserName}/reposts`
+            active: pathName === `/${userName}/reposts`
         },
     ];
 

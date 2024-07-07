@@ -14,6 +14,7 @@ const Main_nav = ({className}: {className?: string}) => {
     }
     
     const encodedUserName = encodeURIComponent(session.data.user.name)
+    
     const routes = [
         {
             label: 'Home',
@@ -35,7 +36,7 @@ const Main_nav = ({className}: {className?: string}) => {
         },
         {
             label: 'profile',
-            href: `@${session.data?.user.name}` || "/proflie",
+            href: `/@${encodedUserName}` || "/proflie",
             active: pathname === `/@${encodedUserName}`,
             logo : <User className="w-9 h-9  stroke-slate-300 "/>
         },
