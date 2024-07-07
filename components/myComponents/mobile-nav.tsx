@@ -15,7 +15,7 @@ const MobileNav = ({className}:{
         return
     }
 
-    const encodedUserName = session.user.name.replace(/ /g, "_");
+    const encodedUserName = session.user.name.replace(/ /g, "_").trim();
 
     const routes = [
         {
