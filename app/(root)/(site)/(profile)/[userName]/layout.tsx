@@ -1,10 +1,9 @@
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { getServerSession } from "next-auth";
-
-import { redirect } from "next/navigation";
-import { authOptions } from "@/util/authOptions";
 import Bio from "@/components/_components/bio";
 import ReplyRepost from "@/components/myComponents/reply_repost";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/util/authOptions";
 
 export default async function ProfilePage({ params, children }: {
     params: {
