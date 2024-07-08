@@ -63,7 +63,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setLoading(true);
         try{
-            const update =  await fetch(`http://localhost:3000/api/${session?.user.id}`,{
+            const update =  await fetch(`/api/${session?.user.id}`,{
                 method: "PATCH",
                 headers:{
                     "contentType": "application/json",
