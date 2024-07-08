@@ -3,7 +3,7 @@
 import { ExtendedUser } from "@/util/types";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import PostCards from "./_components/myPostCard";
+import PostCards from "../../../../../components/_components/myPostCard";
 import { authOptions } from "@/util/authOptions";
 import { prisma } from '../../../../../prisma/prismaClient';
 
