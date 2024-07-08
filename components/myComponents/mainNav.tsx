@@ -49,7 +49,7 @@ const Main_nav = ({ className }: { className?: string }) => {
                 return (
                     <Link
                         key={route.href}
-                        href={route.href}
+                        href={route.href}                      
                         className={cn('w-fit p-3 rounded-md hover:bg-green-300', route.active ? "font-bold text-black" : "text-foreground text-gray-300")}
                     >
                         {route.logo}
