@@ -15,6 +15,7 @@ const Bio = ({data}: {
     data: ExtendedUser | null
 }) => {
     const session = useSession()
+    const avatarImage = session.data?.user?.image
 
     return (
         <div className=" text-wrap flex flex-col gap-4">
@@ -25,7 +26,7 @@ const Bio = ({data}: {
                     <div className="w-full">@{data?.name}</div>
                 </div>
                 <Avatar className="w-[70px] h-[70px]">
-                    <AvatarImage src={session.data?.user?.image} />
+                    <AvatarImage src={avatarImage} />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </div>
@@ -47,7 +48,7 @@ const Bio = ({data}: {
                 </Link>
             </div>
             
-            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || " "} links={data?.profile?.links|| ""} bio={data?.profile?.bio || ""} className="w-full font-extrabold"/>
+            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || "No name"} links={data?.profile?.links|| ""} bio={data?.profile?.bio || "No bio"} className="w-full font-extrabold"/>
         </div>
     );
 }
