@@ -6,9 +6,6 @@ import { useEffect } from "react";
 
 const ReplyRepost = ({ userName }: { userName: string }) => {
     const pathName = usePathname();
-    useEffect(()=>{
-        console.log(userName)
-    },[userName])
 
     // URL encode userName to handle any special characters
 
