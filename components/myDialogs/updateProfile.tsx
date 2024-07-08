@@ -25,7 +25,6 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-import { usePathname } from "next/navigation";
 import { updateProfileProps } from "@/util/types";
 
 
@@ -47,7 +46,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
     const {data: session} = useSession()
     const [loading, setLoading] = useState(false);
 
-    const pathName = usePathname()
+
  
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
