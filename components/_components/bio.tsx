@@ -44,7 +44,7 @@ const Bio = ({data}: {
                     href='www.instagram.com'
                     className=""
                 >
-                    <Instagram/>
+                    
                 </Link>
             </div>
             
