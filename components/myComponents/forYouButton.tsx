@@ -8,7 +8,7 @@ const ForYouButton = ({className}: {className?: string}) => {
     const pathname = usePathname()
     return (
         <Link
-        href={pathname =="/following" ? "/foryou": "/following"}
+        href={pathname =="/following" ? "/home": "/following"}
          className={cn("flex items-center px-4 py-3 rounded-3xl border-2", className)}>
             {pathname === "/following"? "following" : "for you"}
             <ArrowLeftRight />
