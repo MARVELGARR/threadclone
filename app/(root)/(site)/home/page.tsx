@@ -1,6 +1,7 @@
 
 import CreatePost from "@/components/myComponents/createPost";
 import ForYouButton from "@/components/myComponents/forYouButton";
+import Loading from "@/components/myComponents/loadingPage";
 import PostCard from "@/components/myComponents/postCard";
 import getCurrentUser from "@/hooks/getCurrentUser";
 import { useGetAllPosts } from "@/hooks/getPosts";
@@ -43,7 +44,7 @@ const HomePage = async () => {
     }
     else{
         return (
-            <div className="">Not logged in</div>
+            <div className=" w-full h-full flex items-center justify-center font-bold text-2xl"> No Posts Gotten!</div>
         )
     }
 }

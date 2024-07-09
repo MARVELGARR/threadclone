@@ -1,3 +1,4 @@
+
 import PostComments from '@/components/myComponents/postComment';
 import { prisma } from '@/prisma/prismaClient';
 import { authOptions } from '@/util/authOptions';
@@ -36,7 +37,7 @@ const Replies = async () => {
         );
     }
     else{
-        return <>Loading...</>
+        return <div className=" w-full h-full flex items-center justify-center font-bold text-2xl"> No Comments Gotten!</div>
     }
 
 }

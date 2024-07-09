@@ -38,27 +38,30 @@ const UsersThreads = async ({params}:{
     })
 
     if(!posts){
-        return "no available posts"
+        return (
+            <div className="flex flex-col gap-3 mt-2">
+                {posts.map((post, index)=>{
+                    return (
+                        <PostCards
+                            key={index}
+                            postId={post.id}
+                            images={post.images}
+                            story={post.story}
+                            tags={post.tags}
+                            user={post.user as ExtendedUser}
+                            like={post.like}
+                        />
+                    )
+                })}
+    
+            </div>
+        );
     }
+    else{
 
-    return (
-        <div className="flex flex-col gap-3 mt-2">
-            {posts.map((post, index)=>{
-                return (
-                    <PostCards
-                        key={index}
-                        postId={post.id}
-                        images={post.images}
-                        story={post.story}
-                        tags={post.tags}
-                        user={post.user as ExtendedUser}
-                        like={post.like}
-                    />
-                )
-            })}
-
-        </div>
-    );
+        return <div className=" w-full h-full flex items-center justify-center font-bold text-2xl"> No Post Gotten!</div>
+    }
+    
     
 
 }

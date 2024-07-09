@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { ExtendedUser } from "@/util/types";
 import useFollowStatus from "@/hooks/useFollowStatus";
+import Loading from "@/components/myComponents/loadingPage";
 
 interface ProfilePageProps {
     params: {
@@ -66,7 +67,7 @@ export default function UserLayout({ params, children }: ProfilePageProps){
     }
     else{
         return (
-            <>Loading</>
+            <Loading/>
         )
     }
 }
