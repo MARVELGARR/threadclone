@@ -21,7 +21,7 @@ const Replies = async () => {
 
         return (
             <>
-                <div className="flex flex-col gap-[3rem]">
+                <div className="flex flex-col gap-2">
                     {comments.map((comment, index)=>{
                         return(
                             <PostComments 
