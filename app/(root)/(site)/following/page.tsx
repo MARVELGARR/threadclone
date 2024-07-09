@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { prisma } from '@/prisma/prismaClient';
 import PostCards from "@/components/_components/myPostCard";
 import { ExtendedUser } from "@/util/types";
+import CreatePost from "@/components/myComponents/createPost";
 const Following = async () => {
     const session = await getServerSession(authOptions)
     const userId = session?.user.id
@@ -29,7 +30,8 @@ const Following = async () => {
     const isFollowinfPosts = posts.filter((post)=> post.user.profile?.following.filter((isFollowing)=> isFollowing.status == "yes"))
 
     return (
-        <div className="">
+        <div className="flex flex-col gap-3">
+            <CreatePost className=' border-b-2 pb-[2rem]'/>
             <div className="">
                 {
                     isFollowinfPosts.map((post, index)=>{
