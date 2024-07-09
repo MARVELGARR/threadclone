@@ -37,7 +37,7 @@ const UsersThreads = async ({params}:{
         
     })
 
-    if(!posts){
+    if(posts){
         return (
             <div className="flex flex-col gap-3 mt-2">
                 {posts.map((post, index)=>{
