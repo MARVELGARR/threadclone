@@ -6,14 +6,13 @@ import { ExtendedUser } from '@/util/types';
 import { getServerSession } from 'next-auth';
 import { useParams } from 'next/navigation';
 
-const UserReplies = async () => {
+const UserReplies = async ({params}:{params: { userId: string}}) => {
 
     const session = await getServerSession(authOptions)
-    const userId = useParams()
 
     const comments = await prisma.reply.findMany({
         where:{
-            userId: userId
+            userId: params.userId
         },
         include: {
             user: true
