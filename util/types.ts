@@ -21,6 +21,8 @@ export interface ExtendedPost extends Post {
   reply?: Reply[]
 }
 
+export type ExtendedReply = Reply & {user: User}
+
 
 export type PostCardProps = {
   id?: string;

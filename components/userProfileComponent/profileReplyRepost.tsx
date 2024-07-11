@@ -30,7 +30,7 @@ const ReplyRepost = ({userId}:{userId: string}) => {
             {routes.map((items, index)=>{
                 return(
                     <Link
-                    key={index}
+                        key={index}
                         href={items.href}
                         className={cn(`border-b-[2px] border-gray-400 px-[4.5rem] py-4`,  items.active ? " text-black font-extrabold border-black border-b-[3px]" : "")}
                     >

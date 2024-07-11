@@ -1,23 +1,37 @@
-
+'use client'
 import PostComments from '@/components/myComponents/postComment';
-import { prisma } from '@/prisma/prismaClient';
-import { authOptions } from '@/util/authOptions';
-import { ExtendedUser } from '@/util/types';
-import { getServerSession } from 'next-auth';
+import { ExtendedReply, ExtendedUser } from '@/util/types';
+import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 
-const UserReplies = async ({params}:{params: { userId: string}}) => {
 
-    const session = await getServerSession(authOptions)
 
-    const comments = await prisma.reply.findMany({
-        where:{
-            userId: params.userId
-        },
-        include: {
-            user: true
+const UserReplies =  () => {
+    const [comments, setComments] = useState<ExtendedReply[] | null>(null)
+    const session = useSession()
+    const {userId} = useParams()
+
+    const handleGetComment = async() =>{
+        try{
+            const data = await fetch(`/api/users`,{
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userId)
+            })
+            if(data.ok){
+                const response = await data.json();
+                setComments(response)
+            }
+
         }
-    })
+        catch(error){
+            return `message: ${error}`
+        }
+    }
+    
     if(comments){
 
         return (
