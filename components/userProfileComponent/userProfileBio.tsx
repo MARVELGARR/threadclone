@@ -27,6 +27,16 @@ const Bio = ({data, followerCount, follow, unfollow, isFollowing}: {
 }) => {
     const {data: session} = useSession()
     const isMyPost =  data?.id === session?.user.id
+    const userImage = session?.user?.image || '';
+
+    let profileLink = 'https://www.instagram.com'; // Default URL
+    if (data?.profile?.links) {
+        try {
+            profileLink = new URL(data.profile.links).href;
+        } catch (e) {
+            console.error("Invalid URL in profile links, falling back to default:", e);
+        }
+    }
 
 
 
@@ -39,7 +49,7 @@ const Bio = ({data, followerCount, follow, unfollow, isFollowing}: {
                     <div className="w-full">@{data?.name}</div>
                 </div>
                 <Avatar className="w-[70px] h-[70px]">
-                    <AvatarImage src={data?.image || 'sasa'} />
+                    <AvatarImage src={userImage} />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </div>
@@ -51,7 +61,7 @@ const Bio = ({data, followerCount, follow, unfollow, isFollowing}: {
                         <div className="">Followers</div>
                     </div>
                     .
-                    <Link className=' italic text-gray-500 ' href={data?.profile?.links || 'www.instagram.com'}>{data?.profile?.links}</Link>
+                    <Link className=' italic text-gray-500 ' href={profileLink}>{data?.profile?.links}</Link>
                 </div>
                 <Link
                     href='www.instagram.com'
