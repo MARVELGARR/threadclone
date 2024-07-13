@@ -25,7 +25,7 @@ const Bio = ({ data }: { data: ExtendedUser | null }) => {
                 console.error("Invalid URL in profile links, falling back to default:", e);
             }
         }
-    },[data?.profile?.links])
+    },[])
 
     return (
         <div className="text-wrap flex flex-col gap-4">
