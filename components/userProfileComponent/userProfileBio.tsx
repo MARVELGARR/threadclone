@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import FollowUnfollow from "../myComponents/follow_unfollow";
+import { useMemo } from "react";
 
 
 
@@ -29,14 +30,17 @@ const Bio = ({data, followerCount, follow, unfollow, isFollowing}: {
     const isMyPost =  data?.id === session?.user.id
     const userImage = session?.user?.image || '';
 
-    let profileLink = 'https://www.instagram.com'; // Default URL
-    if (data?.profile?.links) {
-        try {
-            profileLink = new URL(data.profile.links).href;
-        } catch (e) {
-            console.error("Invalid URL in profile links, falling back to default:", e);
+    const profileLink = useMemo(() => {
+        let defaultLink = 'https://www.instagram.com';
+        if (data?.profile?.links) {
+            try {
+                return new URL(data.profile.links).href;
+            } catch (e) {
+                console.error("Invalid URL in profile links, falling back to default:", e);
+            }
         }
-    }
+        return defaultLink;
+    }, [data?.profile?.links])
 
 
 
