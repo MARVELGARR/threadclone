@@ -6,26 +6,19 @@ import { ExtendedUser } from "@/util/types";
 import { Instagram } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 const Bio = ({ data }: { data: ExtendedUser | null }) => {
     const { data: session } = useSession();
     const avatarImage = session?.user?.image || '';
 
-    let profileLink = ''; // Default URL
-    const [link, setLink] = useState<string>("www.instagram.com")
-
-    useEffect(()=>{
-
-        if (data?.profile?.links) {
-            try {
-                const profileLink = new URL(data.profile.links).href;
-                setLink(profileLink)
-            } catch (e) {
-                console.error("Invalid URL in profile links, falling back to default:", e);
-            }
+    let profileLink = 'https://www.instagram.com'; // Default URL
+    if (data?.profile?.links) {
+        try {
+            profileLink = new URL(data.profile.links).href;
+        } catch (e) {
+            console.error("Invalid URL in profile links, falling back to default:", e);
         }
-    },[])
+    }
 
     return (
         <div className="text-wrap flex flex-col gap-4">
@@ -47,7 +40,7 @@ const Bio = ({ data }: { data: ExtendedUser | null }) => {
                         <div className="">{data?.profile?.follower?.length || 0}</div>
                         <div className="">Followers</div>
                     </div>
-                    <Link className='italic text-gray-500' href={link}>{data?.profile?.links}</Link>
+                    <Link className='italic text-gray-500' href={profileLink}>{data?.profile?.links}</Link>
                 </div>
                 <Link href='https://www.instagram.com' className="">
                     <Instagram className="w-9 h-9"/>
