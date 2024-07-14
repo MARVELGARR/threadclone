@@ -23,8 +23,6 @@ const PostInteractions: React.FC<PostinteractionProps> = ({id, replyCount, likeC
     const [liked, setLiked] = useState(isLiked)
     const [likesCount, setLikesCount] = useState(likeCount || 0)
 
-    console.log(isLiked)
-
     const {data: session} = useSession()
     const userId = session?.user.id
 

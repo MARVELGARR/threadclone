@@ -82,7 +82,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
 
             setLoading(false);
         }
-        console.log(values)
+        
     }
 
     return (

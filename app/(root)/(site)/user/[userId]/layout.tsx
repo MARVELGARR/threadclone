@@ -43,7 +43,6 @@ export default function UserLayout({ params, children }: ProfilePageProps){
         }
         fetchPresentUser(session.user.id)
         fetchPostUser(params.userId)
-        console.log(currentUser)
         
     },[currentUser, params.userId, session.user.id])
 
