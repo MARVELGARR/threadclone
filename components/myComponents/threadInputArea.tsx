@@ -9,6 +9,7 @@ import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import toast from "react-hot-toast";
 import Image from "next/image";
+import { revalidatePath } from "next/cache";
 
 type ThreadsInputProps = {
     id: number,
@@ -114,6 +115,7 @@ const ThreadInputArea = () => {
             toast.error('Failed to create thread: Network error or server unreachable');
         } finally {
             setLoading(false);
+            revalidatePath('/home')
         }
     };
 
