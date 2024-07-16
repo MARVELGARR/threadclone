@@ -77,7 +77,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, reply, li
                                     )}s
                                 </Link>
         
-                                { isMyPost &&(<PostOption className="z-50"  postId={postId}/>)}
+                                
                             </div>
                             <div className="mt-2 space-y-2">
                                 <div className="break-words max-w-[500px]">
@@ -131,6 +131,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, reply, li
         
                     
                 </Link>
+                { isMyPost &&(<PostOption className="z-50 absolute top-3right-2"  postId={postId}/>)}
                 <Separator className="mt-3"/>
                 <PostInteractions className=" w-full ml-[2rem] pt-2" replyCount={replyCount} isLiked={isLiked} likeCount={likeCount} id={postId}/>
             </div>
