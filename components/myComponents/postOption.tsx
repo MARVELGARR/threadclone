@@ -45,7 +45,7 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
 
                 <DropdownMenu >
                     <DropdownMenuTrigger className="relative flex items-center justify-center p-2 z-50">...</DropdownMenuTrigger>
-                    <DropdownMenuContent className=" ml-[2rem] absolute -right-10">
+                    <DropdownMenuContent className=" ml-[2rem] absolute -right-[3rem]">
                         <DropdownMenuLabel>Post options</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={() => handleDeletePost(postId)}>Delete <Trash2Icon/></DropdownMenuItem>
