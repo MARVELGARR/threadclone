@@ -213,7 +213,7 @@ const ThreadInputArea = () => {
         );
     }
     else{
-        return ''
+        return 
     }
 }
 
