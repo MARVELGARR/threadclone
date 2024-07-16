@@ -40,7 +40,7 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId }) => {
         
         return (
             <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center justify-center p-2">...</DropdownMenuTrigger>
+                <DropdownMenuTrigger className="flex items-center justify-center p-2 z-50">...</DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuLabel>Post options</DropdownMenuLabel>
                     <DropdownMenuSeparator />
