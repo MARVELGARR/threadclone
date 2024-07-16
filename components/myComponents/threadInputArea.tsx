@@ -212,9 +212,7 @@ const ThreadInputArea = () => {
             </div>
         );
     }
-    else{
-        return <div className='hidden'></div>
-    }
+
 }
 
 export default ThreadInputArea;
