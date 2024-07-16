@@ -1,6 +1,6 @@
 'use client'
 
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, DialogClose } from '../ui/dialog';
 import { Form, FormControl, FormField, FormItem } from '../ui/form';
 
 import InputPost from '../myComponents/inputPostContainer';
@@ -40,7 +40,7 @@ const CreatePostDialog = ({className}:{className?: string}) => {
                             <FormItem>
                                 <div className=""></div>
                                 <FormControl className='w-full'>
-                                    <ThreadInputArea/>
+                                    <ThreadInputArea />
                                 </FormControl>
 
                             </FormItem>
