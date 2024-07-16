@@ -7,14 +7,16 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils";
 import { Trash2Icon } from "lucide-react";
 import toast from "react-hot-toast";
   
 type PostOptionsProps = {
     postId: string | undefined
+    className?: string 
 }
 
-const PostOption: React.FC<PostOptionsProps> = ({ postId }) => {
+const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
 
         
         const handleDeletePost = async (postId: string | undefined) => {
@@ -39,14 +41,17 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId }) => {
 
         
         return (
-            <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center justify-center p-2 z-50">...</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    <DropdownMenuLabel>Post options</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={() => handleDeletePost(postId)}>Delete <Trash2Icon/></DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+            <div className={cn('', className)}>
+
+                <DropdownMenu >
+                    <DropdownMenuTrigger className="flex items-center justify-center p-2 z-50">...</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>Post options</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={() => handleDeletePost(postId)}>Delete <Trash2Icon/></DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
         );
     
     

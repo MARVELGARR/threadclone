@@ -77,7 +77,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, reply, li
                                     )}s
                                 </Link>
         
-                                { isMyPost &&(<PostOption  postId={postId}/>)}
+                                { isMyPost &&(<PostOption className="z-50"  postId={postId}/>)}
                             </div>
                             <div className="mt-2 space-y-2">
                                 <div className="break-words max-w-[500px]">
