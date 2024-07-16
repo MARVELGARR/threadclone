@@ -19,7 +19,7 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId }) => {
         
         const handleDeletePost = async (postId: string | undefined) => {
             try {
-                const response = await fetch(`http://localhost:3000/api/post/${postId}`, {
+                const response = await fetch(`/api/post/${postId}`, {
                     method: 'DELETE',
                     headers: {
                         "Content-Type": "application/json",
