@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils";
 import { Trash2Icon } from "lucide-react";
+import { revalidatePath } from "next/cache";
 import toast from "react-hot-toast";
   
 type PostOptionsProps = {
@@ -36,6 +37,9 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
                 }
             } catch (error) {
                 toast.error('An error occurred while deleting the post');
+            }
+            finally{
+                revalidatePath('/home', 'page')
             }
         }
 
