@@ -4,14 +4,13 @@ import { useSession } from "next-auth/react";
 import { Input } from "../ui/input";
 import {  Hash, Images, X } from "lucide-react";
 import { Button } from "../ui/button";
-import { ForwardRefExoticComponent, RefAttributes, useState } from "react";
+import { useState } from "react";
 import { UploadButton } from "@uploadthing/react";
 import { OurFileRouter } from "@/app/api/uploadthing/core";
 import toast from "react-hot-toast";
 import Image from "next/image";
-import { revalidatePath } from "next/cache";
 import * as React from 'react';
-import { DialogCloseProps } from "@radix-ui/react-dialog";
+import { useRouter } from "next/navigation";
 
 type ThreadsInputProps = {
     id: number,
@@ -28,6 +27,8 @@ const ThreadInputArea = () => {
     const [imageOpen, setImageOpen] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(true);
+
+    const router = useRouter()
 
     const handleInputChange = (id: number, value: string) => {
         const newThreads = threads.map(thread =>
@@ -119,7 +120,7 @@ const ThreadInputArea = () => {
         } finally {
             setLoading(false);
             setDialogOpen(false);
-           
+            router.refresh();
         }
     };
     if(dialogOpen){
@@ -210,6 +211,9 @@ const ThreadInputArea = () => {
                 </div>
             </div>
         );
+    }
+    else{
+        return <div className="w-full hidden"></div>
     }
 
 }
