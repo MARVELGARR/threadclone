@@ -122,7 +122,6 @@ const ThreadInputArea = () => {
            
         }
     };
-    if (!dialogOpen) return null;
     if(dialogOpen){
         
         return (

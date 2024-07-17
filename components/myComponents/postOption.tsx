@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Trash2Icon } from "lucide-react";
 import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
   
 type PostOptionsProps = {
@@ -19,6 +20,7 @@ type PostOptionsProps = {
 
 const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
 
+    const router = useRouter()
         
         const handleDeletePost = async (postId: string | undefined) => {
             try {
@@ -39,7 +41,7 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
                 toast.error('An error occurred while deleting the post');
             }
             finally{
-                revalidatePath('/home', 'page')
+               router.refresh();
             }
         }
 
