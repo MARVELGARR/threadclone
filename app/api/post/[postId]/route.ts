@@ -6,8 +6,14 @@ export async function DELETE(req: Request, { params }: { params: { postId: strin
         const deletePost = await prisma.post.deleteMany({
             where: {
                 id: params.postId
-            }
+            },
+
         });
+        await prisma.reply.deleteMany({
+            where:{
+                postId: params.postId
+            }
+        })
 
         if (deletePost) {
             return NextResponse.json({ message: 'Post deleted successfully' }, { status: 200 });
