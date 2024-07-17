@@ -213,7 +213,7 @@ const ThreadInputArea = () => {
         );
     }
     else{
-        return <div className="w-full hidden"></div>
+        return <div className="hidden">reeeeeer</div>
     }
 
 }
