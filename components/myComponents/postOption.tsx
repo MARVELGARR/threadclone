@@ -20,7 +20,7 @@ type PostOptionsProps = {
 
 const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
 
-
+    const router = useRouter()
         
         const handleDeletePost = async (postId: string | undefined) => {
             try {
@@ -41,7 +41,7 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
                 toast.error('An error occurred while deleting the post');
             }
             finally{
-
+               router.refresh();
             }
         }
 
