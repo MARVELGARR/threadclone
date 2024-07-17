@@ -40,7 +40,7 @@ const CreatePostDialog = ({className}:{className?: string}) => {
                             <FormItem>
                                 <div className=""></div>
                                 <FormControl className='w-full'>
-                                    <ThreadInputArea />
+                                    <ThreadInputArea  />
                                 </FormControl>
 
                             </FormItem>
