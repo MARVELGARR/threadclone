@@ -126,7 +126,7 @@ const ThreadInputArea = () => {
     if(dialogOpen){
         
         return (
-            <div className="w-full p-4">
+            <div className="w-full p-6">
                 <div className="flex flex-col w-full">
                     {threads.map((thread, index) => (
                         <div key={index} className="flex flex-col items-start gap-3 relative border-b border-gray-200 pb-4 mb-4">
@@ -211,9 +211,6 @@ const ThreadInputArea = () => {
                 </div>
             </div>
         );
-    }
-    else{
-        return <div className="hidden">reeeeeer</div>
     }
 
 }

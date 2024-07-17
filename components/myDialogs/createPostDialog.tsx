@@ -30,7 +30,7 @@ const CreatePostDialog = ({className}:{className?: string}) => {
             <DialogTrigger className='w-full'>
                 <InputPost className='w-full text-left'/>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[725px] sm:max-h-[600px] overflow-y-auto">
+            <DialogContent className="sm:max-w-[725px] p-0 sm:max-h-[600px] overflow-y-auto">
                 <Form {...form}>
                     <form  className="space-y-8">
                         <FormField
