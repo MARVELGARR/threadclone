@@ -1,7 +1,13 @@
-import Loading from "@/components/myComponents/loadingPage";
+import CreatePost from "@/components/myComponents/createPost";
+import Header from "@/components/myComponents/header";
+
+
 
 export default function Home() {
   return (
-    <Loading/>
+    <div className="">
+        <Header/>
+        <CreatePost className=''/>
+    </div>
   );
 }
