@@ -3,7 +3,7 @@ import PostComments from '@/components/myComponents/postComment';
 import { ExtendedReply, ExtendedUser } from '@/util/types';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
@@ -31,6 +31,10 @@ const UserReplies =  () => {
             return `message: ${error}`
         }
     }
+
+    useEffect(()=>{
+        handleGetComment()
+    },[comments])
     
     if(comments){
 
