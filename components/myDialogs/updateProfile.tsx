@@ -26,6 +26,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 import { updateProfileProps } from "@/util/types";
+import { useRouter } from "next/navigation";
 
 
 
@@ -46,6 +47,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
     const {data: session} = useSession()
     const [loading, setLoading] = useState(false);
 
+    const router = useRouter()
 
  
     const form = useForm<z.infer<typeof formSchema>>({
@@ -81,6 +83,7 @@ const UpdateProfileDialog: React.FC<updateProfileProps> = ({
         } finally {
 
             setLoading(false);
+            router.refresh()
         }
         
     }

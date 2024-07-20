@@ -12,29 +12,30 @@ const UserReplies =  () => {
     const session = useSession()
     const {userId} = useParams()
 
-    const handleGetComment = async() =>{
-        try{
-            const data = await fetch(`/api/users`,{
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userId)
-            })
-            if(data.ok){
-                const response = await data.json();
-                setComments(response)
-            }
-
-        }
-        catch(error){
-            return `message: ${error}`
-        }
-    }
+    
 
     useEffect(()=>{
+        const handleGetComment = async() =>{
+            try{
+                const data = await fetch(`/api/users`,{
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(userId)
+                })
+                if(data.ok){
+                    const response = await data.json();
+                    setComments(response)
+                }
+    
+            }
+            catch(error){
+                return `message: ${error}`
+            }
+        }
         handleGetComment()
-    },[comments])
+    },[comments, userId])
     
     if(comments){
 

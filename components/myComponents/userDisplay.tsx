@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 
@@ -12,36 +13,56 @@ import toast from "react-hot-toast";
 const UsersDisplay= ({data, currentUser}: {data: ExtendedUser[], currentUser: ExtendedUser}) => {
 
     const followingsId = currentUser.profile?.id
+    const router = useRouter()
 
     const handleFollow = async( followingId: string) =>{
-        const follow = await fetch('api/follow',{
-            method: 'POST',
-            headers:{
-                'contentType': 'application/json',
-            },
-            body: JSON.stringify({ followerId: followingsId, followingId: followingId})
-        })
-        if(follow.ok){
-            toast.success('followed successfully')
+        try{
+
+            const follow = await fetch('api/follow',{
+                method: 'POST',
+                headers:{
+                    'contentType': 'application/json',
+                },
+                body: JSON.stringify({ followerId: followingsId, followingId: followingId})
+            })
+            if(follow.ok){
+                toast.success('followed successfully')
+            }
+            else{
+                toast.error('following failed')
+            }
         }
-        else{
-            toast.error('following failed')
+        catch(error){
+            return error
+        }
+        finally{
+            router.refresh()
         }
     }
     const handleUnfollow = async( followingId: string) =>{
-        const follow = await fetch('api/follow',{
-            method: 'PATCH',
-            headers:{
-                'contentType': 'application/json',
-            },
-            body: JSON.stringify({ followerId: followingsId, followingId: followingId})
-        })
-        if(follow.ok){
-            toast.success('followed successfully')
+        try{
+
+            const follow = await fetch('api/follow',{
+                method: 'PATCH',
+                headers:{
+                    'contentType': 'application/json',
+                },
+                body: JSON.stringify({ followerId: followingsId, followingId: followingId})
+            })
+            if(follow.ok){
+                toast.success('followed successfully')
+            }
+            else{
+                toast.error('following failed')
+            }
         }
-        else{
-            toast.error('following failed')
+        catch(error){
+            return error
         }
+        finally{
+            router.refresh()
+        }
+
     }
 
     return (

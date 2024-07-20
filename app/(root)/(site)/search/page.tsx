@@ -1,5 +1,4 @@
 
-import Loading from "@/components/myComponents/loadingPage";
 import SearchBar from "@/components/myComponents/searchBar";
 import useGetAllUsers from '@/hooks/getAllUsers';
 import getCurrentUser from "@/hooks/getCurrentUser";
