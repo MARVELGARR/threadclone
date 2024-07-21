@@ -6,9 +6,6 @@ import { ExtendedUser } from "@/util/types"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { prisma } from '../../../../../prisma/prismaClient';
-import Loading from "@/components/myComponents/loadingPage"
-
-
 
 
 

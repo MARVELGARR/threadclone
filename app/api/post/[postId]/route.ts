@@ -9,7 +9,14 @@ export async function DELETE(req: Request, { params }: { params: { postId: strin
             },
 
         });
+
         await prisma.reply.deleteMany({
+            where:{
+                postId: params.postId
+            }
+        })
+
+        await prisma.like.deleteMany({
             where:{
                 postId: params.postId
             }

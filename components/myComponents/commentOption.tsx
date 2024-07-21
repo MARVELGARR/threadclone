@@ -8,6 +8,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Trash2Icon } from "lucide-react";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
   
 type PostOptionsProps = {
@@ -15,6 +17,8 @@ type PostOptionsProps = {
 }
 
 const CommentOption: React.FC<PostOptionsProps> = ({ commentId }) => {
+
+    const router = useRouter()
     if (commentId) {
         
 
@@ -35,6 +39,10 @@ const CommentOption: React.FC<PostOptionsProps> = ({ commentId }) => {
                 }
             } catch (error) {
                 toast.error('An error occurred while deleting the Comment');
+            }
+            finally{
+                router.refresh()
+                revalidatePath('/post')
             }
         }
         

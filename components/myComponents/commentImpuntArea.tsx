@@ -8,6 +8,8 @@ import { useState } from "react";
 
 import toast from "react-hot-toast";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 
 type CommentInputProps = {
@@ -23,6 +25,7 @@ const CommentInputArea = ( {postId, className, handleCloseComment} : {postId: st
     const { data: session } = useSession();
     const [comment, setComment] = useState<CommentInputProps[]>([{ id: 0, value: "" }]);
     const [loading, setLoading] = useState(false);
+    const router = useRouter()
 
     const handleInputChange = (id: number, value: string) => {
         const newComment = comment.map(thread =>
@@ -71,6 +74,8 @@ const CommentInputArea = ( {postId, className, handleCloseComment} : {postId: st
             toast.error('Failed to create thread: Network error or server unreachable');
         } finally {
             setLoading(false);
+            router.refresh()
+            revalidatePath('/post');
         }
     };
 
