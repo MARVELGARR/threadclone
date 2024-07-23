@@ -11,15 +11,15 @@ const ReplyRepost = ({userId}:{userId: string}) => {
         {
             href: `/user/${userId}`,
             name: "Threads",
-            active: pathName === `/${userId}`
+            active: pathName === `/user/${userId}`
         },
         {
-            href: `/${userId}/replies`,
+            href: `/user/${userId}/replies`,
             name: "Replies",
             active: pathName === `/user/${userId}/replies`
         },
         {
-            href: `/${userId}/reposts`,
+            href: `/user/${userId}/reposts`,
             name: "Reposts",
             active: pathName === `/user/${userId}/reposts`
         },
