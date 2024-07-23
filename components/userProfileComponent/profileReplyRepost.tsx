@@ -9,19 +9,19 @@ const ReplyRepost = ({userId}:{userId: string}) => {
 
     const routes = [
         {
-            href: `/${userId}`,
+            href: `/user/${userId}`,
             name: "Threads",
             active: pathName === `/${userId}`
         },
         {
             href: `/${userId}/replies`,
             name: "Replies",
-            active: pathName === `/${userId}/replies`
+            active: pathName === `/user/${userId}/replies`
         },
         {
             href: `/${userId}/reposts`,
             name: "Reposts",
-            active: pathName === `/${userId}/reposts`
+            active: pathName === `/user/${userId}/reposts`
         },
     ]
 
