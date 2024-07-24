@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className={cn('h-20 w-full hidden grid-template-coloum mx-auto max-w-[1230px] ')}>
                 <Link
                 className=" "
-                    href="/home"
+                    href="/"
                 >
                 
                     <Image
@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
                 <div className="">{''}</div>
                 <Link
                 className=" "
-                    href="/home"
+                    href="/"
                 >
                 
                     <Image

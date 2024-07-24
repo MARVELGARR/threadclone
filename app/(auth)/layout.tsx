@@ -10,7 +10,7 @@ const AuthLayout = ({children}:{
 
     const {data: session} = useSession()
     if(session){
-        redirect("/home")
+        redirect("/")
     }
     
     return (

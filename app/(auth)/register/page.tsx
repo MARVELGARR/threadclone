@@ -27,7 +27,7 @@ export default function Register() {
             if(newUser.ok){
                 const res = await newUser.json()
                 toast.success("user registered successfully")
-                window.location.replace("/home")
+                window.location.replace("/")
             }
             else{
                 toast.error("user registration failed")
