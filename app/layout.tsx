@@ -16,7 +16,7 @@ const PageLayout = ({children}: {children: React.ReactNode}) => {
         },
     })
     return (
-        <div className=" mx-auto  max-w-[620px] text-wrap">
+        <div className="w-full ">
 
             <Header className='py-4 sticky top-0 bg-white z-50'/>
             <MobileNav className=" lg:hidden"/>
