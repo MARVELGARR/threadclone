@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -6,6 +7,8 @@ import Session_Provider from "@/providers/session-provider";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
+import Header from "@/components/myComponents/header";
+import MobileNav from "@/components/myComponents/mobile-nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +42,11 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-            {children}
+            <div className="">
+                <Header className='py-4 sticky top-0 bg-white z-50'/>
+                <MobileNav className=" lg:hidden"/>
+                {children}
+            </div>
           </ThemeProvider>
         </Session_Provider>
       </body>
