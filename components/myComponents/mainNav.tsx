@@ -19,8 +19,8 @@ const Main_nav = ({ className }: { className?: string }) => {
     const routes = [
         {
             label: 'Home',
-            href: '/home',
-            active: pathname === '/home',
+            href: '/',
+            active: pathname === '/',
             logo: <HomeIcon className="w-9 h-9" />
         },
         {
