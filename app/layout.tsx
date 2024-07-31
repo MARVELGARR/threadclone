@@ -43,9 +43,12 @@ export default function RootLayout({
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
             <div className="">
-                <Header className='py-4 sticky top-0 bg-white z-50'/>
-                <MobileNav className=" lg:hidden"/>
+              <Header className='py-4 sticky top-0 bg-white z-50'/>
+              <MobileNav className=" lg:hidden"/>
+              <div className=' p-[2rem] lg:p-[0]'>
+
                 {children}
+              </div>
             </div>
           </ThemeProvider>
         </Session_Provider>
