@@ -39,7 +39,7 @@ const HomePage = async () => {
                             )
                         })}
                     </div>
-                    <ForYouButton className='absolute bottom-10 left-10'/>
+                    <ForYouButton className='absolute bottom-10 left-10 hidden lg:block'/>
                 </div>
             );
         }
