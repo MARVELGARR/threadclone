@@ -19,7 +19,7 @@ const PageLayout = ({children}: {children: React.ReactNode}) => {
         <div className="w-full">
 
             
-            <div className="">
+            <div className=" ">
                 {children}
             </div>
         </div>
