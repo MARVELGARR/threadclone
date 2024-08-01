@@ -11,7 +11,7 @@ const SiteLayout = ({children}:{children: React.ReactNode}) => {
         },
     })
     return (
-        <div className=" mx-auto  max-w-[620px] text-wrap overflow-y-auto">
+        <div className=" mx-auto  max-w-[620px] text-wrap overflow-x-auto">
             {children}
         </div>
     );
