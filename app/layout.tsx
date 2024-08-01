@@ -45,7 +45,7 @@ export default function RootLayout({
             <div className="rrelative">
               <Header className='py-4 sticky top-0 bg-white z-50'/>
               <MobileNav className=" lg:hidden z-[999] bg-white absolute bottom-0"/>
-              <div className=' p-[2rem] lg:p-[0]  overflow-y-auto'>
+              <div className=' p-[2rem] lg:p-[0]  '>
 
                 {children}
               </div>
