@@ -44,7 +44,7 @@ export default function RootLayout({
         />
             <div className="relative h-screen">
               <Header className='py-4 sticky top-0 bg-white z-50'/>
-              <MobileNav className=" lg:hidden z-[999] bg-white sticky bottom-1 "/>
+              <MobileNav className=" lg:hidden z-[999] bg-white sticky  "/>
               <div className=' p-[2rem] lg:p-[0] '>
 
                 {children}
