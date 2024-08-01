@@ -11,10 +11,13 @@ import { signOut } from "next-auth/react";
   
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 const Menu = ({className}:{
     className?: string
 }) => {
+
+    const {setTheme} = useTheme()
     return (
         <div className={cn("", className)}>
             <DropdownMenu>
@@ -38,19 +41,15 @@ const Menu = ({className}:{
                                 </div>
 
                                 <ToggleGroup className=" bg-slate-300/30 rounded-md w-full flex justify-between" type="single">
-                                    <ToggleGroupItem className="w-full" value="a"><SunDimIcon/></ToggleGroupItem>
-                                    <ToggleGroupItem className="w-full" value="b"><MoonIcon/></ToggleGroupItem>
-                                    <ToggleGroupItem className="w-full" value="c">Auto</ToggleGroupItem>
+                                    <ToggleGroupItem className="w-full" value="a"><SunDimIcon onClick={()=>setTheme('light')}/></ToggleGroupItem>
+                                    <ToggleGroupItem className="w-full" value="b"><MoonIcon onClick={()=>setTheme('dark')}/></ToggleGroupItem>
+                                    <ToggleGroupItem onClick={()=>setTheme('system')} className="w-full" value="c">Auto</ToggleGroupItem>
                                 </ToggleGroup>
 
 
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className=" font-bold cursor-pointer">Settings</DropdownMenuItem>
-                    <DropdownMenuItem className=" font-bold cursor-pointer">Saved</DropdownMenuItem>
-                    <DropdownMenuItem className=" font-bold cursor-pointer">Your likes</DropdownMenuItem>
-                    <DropdownMenuItem className=" font-bold cursor-pointer">Report a problem</DropdownMenuItem>
                     <DropdownMenuItem className=" font-bold cursor-pointer" onClick={()=>signOut()}>Log out</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
