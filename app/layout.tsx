@@ -44,8 +44,8 @@ export default function RootLayout({
         />
             <div className="">
               <Header className='py-4 sticky top-0 bg-white z-50'/>
-              <MobileNav className=" lg:hidden"/>
-              <div className=' p-[2rem] lg:p-[0]'>
+              <MobileNav className=" lg:hidden z-[999]"/>
+              <div className=' p-[2rem] lg:p-[0] overflow-scroll'>
 
                 {children}
               </div>
