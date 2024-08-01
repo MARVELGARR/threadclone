@@ -42,7 +42,7 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-            <div className="relative">
+            <div className="relative h-screen">
               <Header className='py-4 sticky top-0 bg-white z-50'/>
               <MobileNav className=" lg:hidden z-[999] bg-white sticky bottom-0"/>
               <div className=' p-[2rem] lg:p-[0] '>
