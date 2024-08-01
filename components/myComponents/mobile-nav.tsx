@@ -47,7 +47,7 @@ const MobileNav = ({className}:{
     ];
 
     return (
-        <nav className={cn("flex w-full items-center justify-between  h-fit absolute bottom-0", className)}>
+        <nav className={cn("flex w-full items-center flex-shrink justify-between  h-fit absolute bottom-0", className)}>
             {routes.map((route, index)=>{
                 return (
                     <Link
