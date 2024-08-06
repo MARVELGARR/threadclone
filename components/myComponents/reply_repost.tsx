@@ -23,7 +23,7 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
     ];
 
     return (
-        <div className="flex items-center w-full gap-[2px]">
+        <div className="flex items-center w-full gap-[2px] flex-shrink">
             {routes.map((items, index) => {
                 return (
                     <Link
