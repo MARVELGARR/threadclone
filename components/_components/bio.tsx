@@ -21,7 +21,7 @@ const Bio = ({ data }: { data: ExtendedUser | null }) => {
     }
 
     return (
-        <div className="text-wrap flex flex-col sm:gap-4 flex-shrink">
+        <div className="text-wrap text-xs sm:text-sm flex flex-col sm:gap-4 flex-shrink">
             <div className="flex items-center p-2 sm:p-0 justify-between flex-shrink">
                 <div className="flex flex-col items-center text-left">
                     <div className="w-full text-left font-bold text-2xl">{data?.profile?.name || <div className='italic'>no profile name</div>}</div>
@@ -46,7 +46,7 @@ const Bio = ({ data }: { data: ExtendedUser | null }) => {
                     <Instagram className="w-9 h-9"/>
                 </Link>
             </div>
-            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || "No name"} links={data?.profile?.links || ""} bio={data?.profile?.bio || "No bio"} className=" w-2/5  sm:w-full font-extrabold"/>
+            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || "No name"} links={data?.profile?.links || ""} bio={data?.profile?.bio || "No bio"} className=" flex-shrink w-full font-extrabold"/>
         </div>
     );
 }
