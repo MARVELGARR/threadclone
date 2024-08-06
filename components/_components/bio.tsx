@@ -21,13 +21,13 @@ const Bio = ({ data }: { data: ExtendedUser | null }) => {
     }
 
     return (
-        <div className="text-wrap flex flex-col md:gap-4 flex-shrink">
-            <div className="flex items-center p-2 md:p-0 justify-between flex-shrink">
+        <div className="text-wrap flex flex-col sm:gap-4 flex-shrink">
+            <div className="flex items-center p-2 sm:p-0 justify-between flex-shrink">
                 <div className="flex flex-col items-center text-left">
                     <div className="w-full text-left font-bold text-2xl">{data?.profile?.name || <div className='italic'>no profile name</div>}</div>
                     <div className="w-full">@{data?.name}</div>
                 </div>
-                <Avatar className=" w-[50px] h-[50px] md:w-[70px] md:h-[70px]">
+                <Avatar className=" w-[50px] h-[50px] sm:w-[70px] sm:h-[70px]">
                     <AvatarImage src={avatarImage} />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
@@ -46,7 +46,7 @@ const Bio = ({ data }: { data: ExtendedUser | null }) => {
                     <Instagram className="w-9 h-9"/>
                 </Link>
             </div>
-            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || "No name"} links={data?.profile?.links || ""} bio={data?.profile?.bio || "No bio"} className=" w-2/5  md:w-full font-extrabold"/>
+            <UpdateProfileDialog id={data?.profile?.id || " "} name={data?.profile?.name || "No name"} links={data?.profile?.links || ""} bio={data?.profile?.bio || "No bio"} className=" w-2/5  sm:w-full font-extrabold"/>
         </div>
     );
 }
