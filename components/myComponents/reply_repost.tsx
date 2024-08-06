@@ -23,13 +23,13 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
     ];
 
     return (
-        <div className="flex items-center w-full gap-[2px] flex-shrink">
+        <div className="flex items-center w-full gap-[2px]">
             {routes.map((items, index) => {
                 return (
                     <Link
                         key={index}
                         href={items.href}
-                        className={cn(`border-b-[2px] border-gray-400 flex-shrink m py-4`, items.active ? "text-black font-extrabold border-black border-b-[3px]" : "")}
+                        className={cn(`border-b-[2px] border-gray-400 sm:px-[4.5rem] :py-4`, items.active ? "text-black font-extrabold border-black border-b-[3px]" : "")}
                     >
                         {items.name}
                     </Link>
