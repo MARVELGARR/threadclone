@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex w-full items-center justify-between px-4 md:hidden">
                 <div className="">{''}</div>
                 <Link
-                className=" "
+                className=" bg-white"
                     href="/"
                 >
                 
