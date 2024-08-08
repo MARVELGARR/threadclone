@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({
 
 }) => {
     return (
-        <div className={cn("", className)}>
+        <div className={cn(" bg-primary", className)}>
             <div className={cn('h-20 w-full hidden grid-template-coloum mx-auto max-w-[1230px] ')}>
                 <Link
                 className=" "
