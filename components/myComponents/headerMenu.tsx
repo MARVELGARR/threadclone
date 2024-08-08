@@ -19,11 +19,11 @@ const Menu = ({className}:{
 
     const {setTheme} = useTheme()
     return (
-        <div className={cn("", className)}>
+        <div className={cn(" ", className)}>
             <DropdownMenu>
                 <DropdownMenuTrigger>
 
-                    <AlignRight className="w-9 h-9 "/>
+                    <AlignRight className="w-9 h-9 dar:text-white "/>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem className=' font-bold cursor-pointer  '>
