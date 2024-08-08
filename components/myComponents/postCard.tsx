@@ -53,7 +53,7 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, reply, li
     if(landed){
 
         return (
-            <div className={`p-4 z-9 relative bg-white shadow rounded-lg w-full max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`}>
+            <div className={`p-4 z-9 relative bg-background text-foreground shadow rounded-lg w-full max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`}>
 
                 <Link href={`/post/${postId}`}  className={` cursor-pointer `}>
                     <div className="flex items-start gap-4 w-full relative">

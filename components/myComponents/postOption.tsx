@@ -47,7 +47,7 @@ const PostOption: React.FC<PostOptionsProps> = ({ postId, className }) => {
 
         
         return (
-            <div className={cn('', className)}>
+            <div className={cn('bg-background text-foreground', className)}>
 
                 <DropdownMenu >
                     <DropdownMenuTrigger className="relative flex items-center justify-center p-2 z-50">...</DropdownMenuTrigger>
