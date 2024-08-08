@@ -19,7 +19,7 @@ const PageLayout = ({children}: {children: React.ReactNode}) => {
         <div className="w-full">
 
             
-            <div className=" overflow-y-auto">
+            <div className=" overflow-y-auto bg-background text-foreground">
                 {children}
             </div>
         </div>
