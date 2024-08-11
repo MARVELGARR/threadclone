@@ -21,25 +21,25 @@ const Main_nav = ({ className }: { className?: string }) => {
             label: 'Home',
             href: '/',
             active: pathname === '/',
-            logo: <HomeIcon className="w-9 h-9" />
+            logo: <HomeIcon className="w-9 h-9 text-foreground" />
         },
         {
             label: 'Search',
             href: '/search',
             active: pathname === '/search',
-            logo: <SearchIcon className="w-9 h-9" />
+            logo: <SearchIcon className="w-9 h-9 text-foreground" />
         },
         {
             label: 'Edit',
             href: '/edit',
             active: pathname === '/edit',
-            logo: <Edit className="w-9 h-9" />
+            logo: <Edit className="w-9 h-9 text-foreground" />
         },
         {
             label: 'Profile',
             href: encodedUserName ? `/${encodedUserName}` : "/profile",
             active: pathname === `/${encodedUserName}`,
-            logo: <User className="w-9 h-9 stroke-slate-300" />
+            logo: <User className="w-9 h-9 stroke-slate-300 text-foreground" />
         },
     ];
 
