@@ -45,7 +45,7 @@ const Bio = ({data, followerCount, follow, unfollow, isFollowing}: {
 
 
     return (
-        <div className=" text-wrap flex flex-col gap-4">
+        <div className=" text-wrap flex flex-col gap-4 bg-background text-foreground">
             <div className="flex items-center justify-between ">
                 <div className="flex flex-col items-center text-left">
                     
