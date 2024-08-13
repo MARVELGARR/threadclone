@@ -20,7 +20,7 @@ const PostComments : React.FC<commentCardProps> = ({ like, story, user, commentI
 
     return (
         <div className={cn(`p-4 z-9 cursor-pointer bg-background text-foreground shadow rounded-lg  max-w-full ${isThread ? 'border-l-4 border-blue-500' : ''}`, className)}>
-                <div className="flex items-start gap-4 w-full relative">
+                <div className="flex items-start bg-background text-foreground gap-4 w-full relative">
                     <Avatar className="w-12 h-12">
                         <AvatarImage  src={user.image || undefined} />
                         <AvatarFallback>CN</AvatarFallback>
