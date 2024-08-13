@@ -49,7 +49,7 @@ const CommentOption: React.FC<PostOptionsProps> = ({ commentId }) => {
         return (
             <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center justify-center p-2">...</DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className='text-foreground bg-foreground'>
                     <DropdownMenuLabel>Post options</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={() => handleDeleteComment(commentId)}>Delete <Trash2Icon/></DropdownMenuItem>

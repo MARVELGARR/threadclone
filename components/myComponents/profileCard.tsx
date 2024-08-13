@@ -17,7 +17,7 @@ const ProfileCard: React.FC<profileCardProps> = ({ user, followerCount, classNam
     if (session) {
         return (
             <div className={cn('flex flex-col gap-3 text-foreground bg-background', className)}>
-                <div className="flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full text-foreground bg-foreground">
                     <div className="flex flex-col">
                         <Link href={`/user/${user.id}`} className="">{user.profile?.name || ''}</Link>
                         <div className="text-sm font-thin">{session?.user.name}</div>
@@ -27,7 +27,7 @@ const ProfileCard: React.FC<profileCardProps> = ({ user, followerCount, classNam
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                 </div>
-                <div>
+                <div className="text-foreground bg-foreground">
                     <p className="text-sm font-thin">{user.profile?.bio}</p>
                     <div className="flex items-center">
                         <div></div>
@@ -49,7 +49,7 @@ const ProfileCard: React.FC<profileCardProps> = ({ user, followerCount, classNam
         );
     } else {
         return (
-            <div className="">Not logged in</div>
+            <div className="text-foreground bg-foreground">Not logged in</div>
         );
     }
 };

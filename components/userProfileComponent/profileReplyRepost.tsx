@@ -32,7 +32,7 @@ const ReplyRepost = ({userId}:{userId: string}) => {
                     <Link
                         key={index}
                         href={items.href}
-                        className={cn(`border-b-[2px] border-gray-400 px-[4.5rem] py-4`,  items.active ? " text-black font-extrabold border-black border-b-[3px]" : "")}
+                        className={cn(`border-b-[2px] border-gray-400 px-[4.5rem] py-4`,  items.active ? " text-emerald-600 font-extrabold border-black border-b-[3px]" : "text-foreground ")}
                     >
                         {items.name}
                     </Link>
