@@ -29,14 +29,14 @@ export default async function ProfilePage({ params, children }: {
     const sanitizedUserName = params.userName.replace(/%40/g, "").replace(/%20/g, "");
 
     return (
-        <>
+        <div className='bg-background text-foreground'>
             <title>{`${currentUser?.name} (@${sanitizedUserName} on Threads)`}</title>
             <div className="flex flex-col flex-wrap z-99999">
                 <Bio data={currentUser} />
                 <ReplyRepost userName={params.userName} />
                 {children}
             </div>
-        </>
+        </div>
     );
 }
 
