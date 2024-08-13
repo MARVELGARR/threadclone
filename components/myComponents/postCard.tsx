@@ -71,8 +71,8 @@ const PostCards: React.FC<PostCardProps> = ({ story, images, follower, reply, li
                                 >
                                     {user.name}
                                     {isHovered && (
-                                        <div className="absolute z-50 top-0 left-0 mt-2">
-                                            <ProfileCard followerCount={followerCount} isFollowing={isFollowing} follow={follow} unfollow={unfollow} currentUser={currentUser as ExtendedUser} user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-white" />
+                                        <div className="absolute z-50 top-0 left-0 mt-2 text-foreground bg-background">
+                                            <ProfileCard followerCount={followerCount} isFollowing={isFollowing} follow={follow} unfollow={unfollow} currentUser={currentUser as ExtendedUser} user={user} className="shadow-xl h-fit z-50 w-[20rem] p-3 rounded-md bg-background text-foreground" />
                                         </div>
                                     )}s
                                 </Link>

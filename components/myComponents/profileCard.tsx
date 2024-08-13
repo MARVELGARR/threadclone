@@ -16,7 +16,7 @@ const ProfileCard: React.FC<profileCardProps> = ({ user, followerCount, classNam
 
     if (session) {
         return (
-            <div className={cn('flex flex-col gap-3 text-foreground bg-background', className)}>
+            <div className={cn('flex flex-col gap-3 ', className)}>
                 <div className="flex items-center justify-between w-full text-foreground bg-foreground">
                     <div className="flex flex-col">
                         <Link href={`/user/${user.id}`} className="">{user.profile?.name || ''}</Link>
