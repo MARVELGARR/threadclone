@@ -39,7 +39,7 @@ const Main_nav = ({ className }: { className?: string }) => {
             label: 'Profile',
             href: encodedUserName ? `/${encodedUserName}` : "/profile",
             active: pathname === `/${encodedUserName}`,
-            logo: <User className="w-9 h-9 stroke-slate-300 text-foreground" />
+            logo: <User className="w-9 h-9  text-foreground" />
         },
     ];
 
@@ -50,7 +50,7 @@ const Main_nav = ({ className }: { className?: string }) => {
                     <Link
                         key={route.href}
                         href={route.href}                      
-                        className={cn('w-fit p-3 rounded-md hover:bg-green-300', route.active ? "font-bold text-black" : "text-foreground text-gray-300")}
+                        className={cn('w-fit p-3 rounded-md hover:bg-foreground', route.active ? "font-bold text-black" : "text-foreground ")}
                     >
                         {route.logo}
                     </Link>
