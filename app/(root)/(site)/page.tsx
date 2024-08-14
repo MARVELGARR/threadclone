@@ -23,7 +23,7 @@ const HomePage = async () => {
             return (
                 <div className="">
                     <CreatePost className=' border-b-2 pb-[2rem]'/>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 ">
                         {posts.map((post, index)=>{
                             return(
                                 <PostCard

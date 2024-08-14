@@ -29,7 +29,7 @@ const ReplyRepost = ({ userName }: { userName: string }) => {
                     <Link
                         key={index}
                         href={items.href}
-                        className={cn(`border-b-[2px] bg-background text-foreground border-gray-400 w-full flex justify-center items-center flex-shrink md:px-[4.5rem] md:py-4`, items.active ? " text-emerald-400 font-extrabold border-black border-b-[3px]" : " text-foreground")}
+                        className={cn(`border-b-[2px] bg-background text-foreground border-gray-400 w-full flex justify-center items-center flex-shrink md:px-[4.5rem] md:py-4`, items.active ? " text-emerald-400 font-extrabold border-l-foreground border-b-[3px]" : " text-foreground")}
                     >
                         {items.name}
                     </Link>
