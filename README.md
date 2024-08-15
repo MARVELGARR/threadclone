@@ -7,7 +7,9 @@ This project is an Instagram Threads clone built using modern web technologies. 
 
 - **User Authentication**: Sign up, log in, and manage user sessions using NextAuth.js.
 - **Post Creation**: Create, edit, and delete threads.
+- **Reply**: Create, edit, and delete threads Replies.
 - **Like Functionality**: Users can like and unlike threads.
+- **Follow Functionality**: Users can follow and unfollow other users.
 - **Responsive Design**: Fully responsive UI using Tailwind CSS.
 - **Database Management**: Prisma as the ORM for MongoDB.
 
