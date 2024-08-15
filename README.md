@@ -1,3 +1,4 @@
+# Demo https://threadclone-chi.vercel.app/
 # Instagram Threads Clone
 
 This project is an Instagram Threads clone built using modern web technologies. It aims to replicate the core functionality of Instagram Threads, including post creation, liking posts, and user authentication. The project is built with **Next.js**, **Tailwind CSS**, **Prisma**, **MongoDB**, and **NextAuth.js** for authentication.
