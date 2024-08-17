@@ -50,7 +50,7 @@ const Main_nav = ({ className }: { className?: string }) => {
                     <Link
                         key={route.href}
                         href={route.href}                      
-                        className={cn('w-fit p-3 rounded-md hover:bg-foreground', route.active ? "font-bold text-black" : "text-foreground ")}
+                        className={cn('w-fit p-3 rounded-md hover:bg-slate-300', route.active ? "font-bold text-black" : "text-foreground ")}
                     >
                         {route.logo}
                     </Link>
